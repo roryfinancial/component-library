@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Rory Design System — Keystone · rory</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ── TOKENS ── */
 :root {
@@ -23,6 +23,7 @@
   --sidebar-text:rgba(255,255,255,.5); --sidebar-text-hi:rgba(255,255,255,.9);
   --sidebar-hover:rgba(255,255,255,.05); --sidebar-active:rgba(255,255,255,.08);
   --font-sans:'Inter',system-ui,sans-serif;
+  --font-platform:'DM Sans',system-ui,sans-serif;
   --font-mono:'SF Mono','Fira Code',ui-monospace,monospace;
   --fs-xs:11px; --fs-sm:12px; --fs-base:14px;
   --fs-md:16px; --fs-lg:18px; --fs-2xl:28px;
@@ -49,6 +50,7 @@
   --p-text-dim:rgba(255,255,255,.28);
   --p-accent:#a855f7; --p-accent-hover:#9333ea;
   --p-accent-glow:rgba(168,85,247,.09);
+  --font-sans:'DM Sans',system-ui,sans-serif;
 }
 
 /* ── RESET ── */
@@ -178,7 +180,7 @@ input,select,textarea{font-family:inherit;font-size:var(--fs-base)}
   backdrop-filter:blur(20px) saturate(1.4);
   -webkit-backdrop-filter:blur(20px) saturate(1.4);
   border-bottom:1px solid var(--p-border);
-  align-items:center;justify-content:space-between;padding:0 var(--sp-12);
+  align-items:center;justify-content:space-between;padding:0;
 }
 .shell.platform .plat-header{display:flex}
 .plat-logo{display:flex;align-items:center;gap:var(--sp-4)}
@@ -309,7 +311,10 @@ input.error:focus{box-shadow:0 0 0 3px rgba(239,68,68,.1)}
 .plat-section.active{display:block}
 
 /* ── PLATFORM LANDING ── */
-.plat-landing-wrap{min-height:calc(100vh - 60px);overflow:hidden}
+.plat-landing-wrap{min-height:calc(100vh - 60px);overflow:hidden;max-width:1440px;margin:0 auto;width:100%}
+.shell.platform section{display:flex;justify-content:center}
+.shell.platform .plat-dash-layout,.shell.platform .plat-supp-layout{max-width:1440px;width:100%}
+.plat-header-inner{max-width:1440px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;height:100%;padding:0 var(--sp-12)}
 
 .plat-hero{
   min-height:80vh;display:flex;flex-direction:column;
@@ -902,72 +907,113 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 @keyframes sectionIn{from{opacity:0}to{opacity:1}}
 
 /* ── RESPONSIVE ── */
+
+/* ── TABLET: 769px – 1100px ── */
+@media (min-width: 769px) and (max-width: 1100px) {
+
+  /* platform header */
+  .plat-header-inner { padding: 0 var(--sp-8); }
+  .plat-header-nav a { padding: var(--sp-3) var(--sp-4); font-size: 12px; }
+  .plat-header-cta .btn-sm { padding: 0 var(--sp-5); font-size: 12px; }
+
+  /* landing */
+  .plat-hero { padding: 72px var(--sp-10) var(--sp-16); min-height: 70vh; }
+  .plat-features { grid-template-columns: 1fr 1fr; padding: 0 var(--sp-10); }
+  .plat-feat-card:last-child { grid-column: 1 / -1; max-width: 480px; margin: 0 auto; }
+  .plat-stats-strip { gap: var(--sp-12); padding: var(--sp-12) var(--sp-10) var(--sp-16); }
+
+  /* creator dashboard: narrower sidebar */
+  .plat-dash-layout { grid-template-columns: 240px 1fr; }
+  .plat-dash-sidebar { padding: var(--sp-8) var(--sp-6); }
+  .plat-dash-main { padding: var(--sp-8) var(--sp-8); }
+  .plat-lb-hdr-row, .plat-lb-row { grid-template-columns: 38px 1fr 64px 82px; padding: var(--sp-4) var(--sp-5); }
+
+  /* supporter: narrower sidebar */
+  .plat-supp-layout { grid-template-columns: 1fr 260px; }
+  .plat-feed-col { padding: var(--sp-8) var(--sp-8); }
+  .plat-gam-col { padding: var(--sp-6) var(--sp-6); }
+
+  /* corp */
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+  .page { padding: var(--sp-10) var(--sp-8) var(--sp-16); }
+}
+
+/* ── MOBILE: ≤768px ── */
 @media (max-width: 768px) {
 
-  /* hide corp sidebar, full-width main */
+  /* corp sidebar hidden */
   .sidebar { display: none !important; }
   .corp-sections { display: block !important; }
   .shell.platform.plat-lib .corp-sections { display: block !important; }
-  .main-wrap { width: 100%; }
-  .topbar { padding: 0 var(--sp-6); gap: var(--sp-4); }
+  .topbar { padding: 0 var(--sp-6); }
   .topbar-search { display: none; }
   .topbar-actions .btn { display: none; }
 
-  /* platform header: scrollable nav */
-  .plat-header { padding: 0 var(--sp-5); gap: var(--sp-4); }
+  /* platform header */
+  .plat-header-inner { padding: 0 var(--sp-5); gap: var(--sp-4); }
   .plat-header-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 0; flex-shrink: 1; }
   .plat-header-nav::-webkit-scrollbar { display: none; }
-  .plat-header-nav a { padding: var(--sp-3) var(--sp-5); white-space: nowrap; font-size: 12px; }
-  .plat-header-cta .btn-plat-outline { display: none; }
+  .plat-header-nav a { padding: var(--sp-3) var(--sp-4); white-space: nowrap; font-size: 12px; }
+  .plat-header-cta .btn:first-child { display: none; }
 
   /* landing */
-  .plat-hero { padding: var(--sp-16) var(--sp-8) var(--sp-10); }
-  .plat-hero-title { font-size: 32px; }
-  .plat-feat-grid { grid-template-columns: 1fr; padding: 0 var(--sp-8); }
-  .plat-stats-strip { flex-direction: column; gap: var(--sp-10); padding: var(--sp-10) var(--sp-8); }
+  .plat-hero { padding: var(--sp-16) var(--sp-6) var(--sp-12); min-height: auto; }
+  .plat-hero-title { font-size: 36px; }
+  .plat-features { grid-template-columns: 1fr; padding: 0 var(--sp-6); gap: var(--sp-4); }
+  .plat-stats-strip { flex-direction: column; gap: var(--sp-8); padding: var(--sp-10) var(--sp-6); }
   .plat-stat-div { display: none; }
+  .plat-stat-num { font-size: 32px; }
 
-  /* creator dashboard: stack columns */
+  /* creator dashboard: stack */
   .plat-dash-layout { grid-template-columns: 1fr; }
-  .plat-dash-sidebar {
-    position: static; height: auto; border-right: none;
-    border-bottom: 1px solid var(--p-border);
-    padding: var(--sp-8) var(--sp-6);
-  }
+  .plat-dash-sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--p-border); padding: var(--sp-8) var(--sp-6); }
   .plat-dash-main { padding: var(--sp-8) var(--sp-6); }
-  .plat-project-grid { grid-template-columns: 1fr 1fr; }
-  .plat-lb-hdr-row, .plat-lb-row { grid-template-columns: 38px 1fr 60px 76px; padding: var(--sp-4) var(--sp-5); }
+  .plat-lb-hdr-row, .plat-lb-row { grid-template-columns: 36px 1fr 56px 72px; padding: var(--sp-4) var(--sp-5); font-size: 12px; }
 
-  /* supporter: stack feed + gamification */
+  /* supporter: stack */
   .plat-supp-layout { grid-template-columns: 1fr; }
   .plat-feed-col { border-right: none; border-bottom: 1px solid var(--p-border); padding: var(--sp-6) var(--sp-5); }
   .plat-gam-col { position: static; height: auto; padding: var(--sp-6) var(--sp-5); flex-direction: row; flex-wrap: wrap; }
-  .plat-gam-col .plat-gam-card { flex: 1 1 280px; }
+  .plat-gam-col .plat-gam-card { flex: 1 1 260px; }
 
-  /* corp page */
-  .page { padding: var(--sp-8) var(--sp-6); }
-  .stats-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+  /* corp */
+  .page { padding: var(--sp-8) var(--sp-5); }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
   .services-grid { grid-template-columns: 1fr; }
   .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-  /* mode bubble */
   #modeBubble { bottom: 16px; }
 }
 
+/* ── SMALL MOBILE: ≤480px ── */
 @media (max-width: 480px) {
-  .plat-project-grid { grid-template-columns: 1fr; }
-  .plat-dash-stats { flex-direction: row; flex-wrap: wrap; }
-  .plat-dash-stat { flex: 1 1 120px; }
-  .plat-hero-title { font-size: 26px; }
+  .plat-hero-title { font-size: 28px; }
   .plat-section-title { font-size: 22px; }
-  .stats-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
   .stat-card { padding: var(--sp-6); }
-  .stat-val { font-size: 22px; }
-  .plat-badge-grid { grid-template-columns: repeat(4, 1fr); }
   .plat-gam-col { flex-direction: column; }
   .plat-gam-col .plat-gam-card { flex: 1 1 100%; }
-  .plat-supp-mini-stats { gap: var(--sp-4); }
-  #modeBubble button { padding: 6px 14px; font-size: 11px; }
+  #modeBubble button { padding: 6px 12px; font-size: 11px; }
+}
+
+/* ── DESKTOP REFINEMENTS: 1101px – 1439px ── */
+@media (min-width: 1101px) and (max-width: 1439px) {
+  .plat-header-inner { padding: 0 var(--sp-10); }
+  .plat-dash-sidebar { padding: var(--sp-10) var(--sp-8); }
+  .plat-dash-main { padding: var(--sp-10) var(--sp-10); }
+  .plat-feed-col { padding: var(--sp-10) var(--sp-10); }
+  .plat-gam-col { padding: var(--sp-8) var(--sp-8); }
+}
+
+/* ── ULTRA-WIDE: 1440px+ ── */
+@media (min-width: 1440px) {
+  .plat-header-inner { padding: 0 var(--sp-16); }
+  .plat-dash-sidebar { padding: var(--sp-12) var(--sp-10); }
+  .plat-dash-main { padding: var(--sp-12) var(--sp-16); }
+  .plat-feed-col { padding: var(--sp-12) var(--sp-16); }
+  .plat-gam-col { padding: var(--sp-10) var(--sp-10); }
+  .plat-hero { padding: 120px var(--sp-16) var(--sp-24); }
+  .plat-features { max-width: 1100px; }
+  .plat-stats-strip { max-width: 1000px; }
+  .page { max-width: 1200px; padding: var(--sp-24) var(--sp-16); }
 }
 </style>
 </head>
@@ -985,6 +1031,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
        PLATFORM HEADER (hidden in corp mode)
   ════════════════════════════════════════ -->
   <header class="plat-header">
+    <div class="plat-header-inner">
     <div class="plat-logo">
       <!-- platform logo -->
       <svg width="32" height="22" viewBox="0 0 32 22" fill="none">
@@ -1003,6 +1050,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
     <div class="plat-header-cta">
       <button class="btn btn-secondary btn-sm">Sign in</button>
       <button class="btn btn-primary btn-sm">Get started</button>
+    </div>
     </div>
   </header>
 
