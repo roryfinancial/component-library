@@ -824,132 +824,58 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:var(--r-full)}
 ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.18)}
-.sidebar::-webkit-scrollbar-thumb{background:rgba(107,32,57,.35)}
-.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(107,32,57,.55)}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(107,32,57,.28)}
+.sidebar::-webkit-scrollbar-thumb:hover{background:rgba(107,32,57,.45)}
 
-/* keyframes */
-@keyframes floatA{0%,100%{transform:translate(-50%,-58%) scale(1)}50%{transform:translate(-50%,-61%) scale(1.05)}}
-@keyframes floatB{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-52%,-53%)}}
-@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
-@keyframes glow-pulse{0%,100%{box-shadow:0 0 0 0 rgba(107,32,57,.0)}50%{box-shadow:0 0 0 3px rgba(107,32,57,.18)}}
-
-/* animated glow orbs */
-.plat-glow-orb{animation:floatA 8s ease-in-out infinite}
-.plat-glow-orb2{animation:floatB 11s ease-in-out infinite}
-
-/* gradient wordmark */
-.plat-wordmark{
-  background:var(--p-grad);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;background-clip:text;
-}
-
-/* platform nav — gradient underline on active */
-.plat-header-nav a{position:relative}
-.plat-header-nav a.active{background:transparent;color:white}
-.plat-header-nav a.active::after{
-  content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
-  width:24px;height:2px;border-radius:var(--r-full);
-  background:var(--p-grad);
-}
-.plat-header-nav a:hover{background:rgba(255,255,255,.05)}
-
-/* mode bubble — gradient border glow */
-#modeBubble{
-  box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 0 1px rgba(168,85,247,.15),0 0 24px rgba(168,85,247,.06);
-}
-#modeBubble:hover{box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 0 1px rgba(168,85,247,.28),0 0 32px rgba(168,85,247,.1)}
-
-/* shimmer on all progress fills */
+/* progress/XP fills — flat, no shimmer */
 .plat-progress-fill,.plat-xp-fill,.plat-post-proj-fill,.plat-quest-bar-fill{
-  background-size:200% auto;
-  background-image:linear-gradient(90deg,#e44d7b,#a855f7,#6366f1,#a855f7,#e44d7b);
-  animation:shimmer 4s linear infinite;
+  background:var(--p-accent);
 }
 
-/* corp stat cards — accent top rule */
-.stat-card{position:relative;overflow:hidden}
-.stat-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),transparent);
-  opacity:.5;
-}
-.shell.platform .stat-card::before{background:var(--p-grad);opacity:.7}
-
-/* card hover elevation */
-.card:hover{box-shadow:var(--shadow-md);transition:box-shadow var(--tr-base)}
-.plat-project-card:hover{box-shadow:0 8px 32px rgba(168,85,247,.12)}
-.plat-post-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.35)}
-.plat-feat-card:hover{box-shadow:0 0 0 1px rgba(168,85,247,.18),0 12px 40px rgba(168,85,247,.1)}
-
-/* corp nav active glow */
-.nav-item.active{box-shadow:inset 2px 0 8px rgba(107,32,57,.15)}
-
-/* platform section title — gradient */
-.plat-section-title{
-  background:var(--p-grad);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;background-clip:text;
-  display:inline-block;
-}
-
-/* gamification cards — glassmorphism */
-.plat-gam-card{
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  background:rgba(20,20,25,.7);
-}
-
-/* badge hover glow */
-.plat-badge:not(.locked):hover{
-  box-shadow:0 0 0 1px rgba(168,85,247,.35),0 4px 16px rgba(168,85,247,.12);
-  background:rgba(168,85,247,.08);
-}
-
-/* post action like hover */
-.plat-action-btn:nth-child(1):hover{background:rgba(228,77,123,.1);border-color:rgba(228,77,123,.2);color:#e44d7b}
-.plat-action-btn:nth-child(2):hover{background:rgba(99,102,241,.1);border-color:rgba(99,102,241,.2);color:#818cf8}
-
-/* leaderboard row top3 subtle left accent */
-.plat-lb-row:nth-child(2){border-left:2px solid rgba(255,215,0,.25)}
-.plat-lb-row:nth-child(3){border-left:2px solid rgba(192,192,192,.2)}
-.plat-lb-row:nth-child(4){border-left:2px solid rgba(205,127,50,.18)}
-
-/* plat-hero-sub contrast bump */
+/* hero sub — legible contrast */
 .plat-hero-sub{color:rgba(255,255,255,.58)}
 
-/* feed tab active — gradient text */
-.plat-feed-tab.active{
-  background:var(--p-surface-hi);
-  color:transparent;
-  background-clip:text;
-  -webkit-background-clip:text;
-  background-image:var(--p-grad);
-  background-color:var(--p-surface-hi);
-}
+/* platform section title — white, not gradient */
+.plat-section-title{color:white;display:block}
 
-/* services grid operational row — subtle left accent */
+/* platform wordmark — white */
+.plat-wordmark{color:white;-webkit-text-fill-color:white}
+
+/* active nav — bg only, no underline decoration */
+.plat-header-nav a.active{background:rgba(255,255,255,.1);color:white}
+
+/* mode bubble — clean shadow, no glow aura */
+#modeBubble{box-shadow:0 4px 24px rgba(0,0,0,.55)}
+
+/* card hover — border lift only, no glow */
+.card:hover{border-color:var(--g300)}
+.plat-project-card:hover{border-color:rgba(255,255,255,.12)}
+.plat-post-card:hover{border-color:rgba(255,255,255,.1)}
+.plat-feat-card:hover{border-color:rgba(255,255,255,.12)}
+
+/* badge hover — border + bg tint, no glow ring */
+.plat-badge:not(.locked):hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)}
+
+/* action buttons — uniform hover */
+.plat-action-btn:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.8)}
+
+/* feed tab active — white text, elevated bg */
+.plat-feed-tab.active{background:var(--p-surface-hi);color:white}
+
+/* service row hover */
 .service-row{transition:background var(--tr-fast)}
 .service-row:hover{background:var(--g50)}
 .shell.platform .service-row:hover{background:rgba(255,255,255,.02)}
 
-/* corp sidebar footer user avatar — maroon glow */
-.sidebar-footer .avatar-sm{box-shadow:0 0 0 2px rgba(107,32,57,.4)}
+/* quest done — struck text */
+.plat-quest:has(.plat-quest-check.done) .plat-quest-label{color:rgba(255,255,255,.3);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.12)}
 
-/* plat-creator-avatar — soft pulse ring */
-.plat-creator-avatar{animation:glow-pulse 3s ease-in-out infinite;animation-name:plat-avatar-glow}
-@keyframes plat-avatar-glow{0%,100%{box-shadow:0 0 0 3px rgba(168,85,247,.2)}50%{box-shadow:0 0 0 5px rgba(168,85,247,.35),0 0 20px rgba(168,85,247,.1)}}
+/* dashboard section header rule */
+.plat-dash-section-hdr{padding-bottom:var(--sp-5);border-bottom:1px solid var(--p-border);margin-bottom:var(--sp-6)}
 
-/* dashboard section header bottom rule */
-.plat-dash-section-hdr{
-  padding-bottom:var(--sp-5);
-  border-bottom:1px solid var(--p-border);
-  margin-bottom:var(--sp-6);
-}
-
-/* quest completed row — muted text */
-.plat-quest:has(.plat-quest-check.done) .plat-quest-label{color:rgba(255,255,255,.35);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.15)}
-
-/* smooth section transitions */
-.plat-section{animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+/* section tab switch — opacity only, no translate */
+.plat-section{animation:sectionIn .15s ease}
+@keyframes sectionIn{from{opacity:0}to{opacity:1}}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
