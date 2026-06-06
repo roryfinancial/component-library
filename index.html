@@ -456,6 +456,134 @@ input.error:focus{box-shadow:0 0 0 3px rgba(239,68,68,.1)}
 .plat-step-desc{font-size:var(--fs-xs);color:rgba(255,255,255,.35)}
 .plat-step-badge{margin-left:auto;font-size:var(--fs-xs);padding:2px var(--sp-4);border-radius:var(--r-full);background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.18)}
 
+/* ── PLATFORM DASHBOARD ── */
+.plat-dash-layout{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 60px);gap:0}
+.plat-dash-sidebar{
+  background:var(--p-surface);border-right:1px solid var(--p-border);
+  padding:var(--sp-10) var(--sp-8);display:flex;flex-direction:column;gap:var(--sp-8);
+  position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;
+}
+.plat-dash-main{padding:var(--sp-10) var(--sp-10);overflow-y:auto;background:var(--p-bg)}
+
+/* profile card */
+.plat-creator-profile{
+  background:var(--p-surface-hi);border:1px solid var(--p-border);
+  border-radius:20px;padding:var(--sp-8);text-align:center;
+}
+.plat-creator-avatar{
+  width:64px;height:64px;border-radius:50%;margin:0 auto var(--sp-4);
+  background:var(--p-grad);display:flex;align-items:center;justify-content:center;
+  font-size:26px;font-weight:var(--fw-bold);color:white;
+  box-shadow:0 0 0 3px rgba(168,85,247,.2);
+}
+.plat-creator-handle{font-size:var(--fs-md);font-weight:var(--fw-semibold);color:white;margin-bottom:var(--sp-1)}
+.plat-verified-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.2);
+  color:#c084fc;font-size:var(--fs-xs);font-weight:var(--fw-semibold);
+  padding:2px 8px;border-radius:var(--r-full);margin-bottom:var(--sp-4);
+}
+.plat-creator-rank{font-size:var(--fs-sm);color:rgba(255,255,255,.38)}
+.plat-creator-rank strong{color:#FFD700}
+
+/* sidebar stat cards */
+.plat-dash-stats{display:flex;flex-direction:column;gap:var(--sp-3)}
+.plat-dash-stat{
+  background:var(--p-surface-hi);border:1px solid var(--p-border);
+  border-radius:14px;padding:var(--sp-5) var(--sp-6);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.plat-dash-stat-label{font-size:var(--fs-xs);color:rgba(255,255,255,.38);font-weight:var(--fw-medium);text-transform:uppercase;letter-spacing:.06em}
+.plat-dash-stat-val{font-size:18px;font-weight:var(--fw-bold);color:white}
+.plat-dash-stat-ico{font-size:18px}
+
+/* recent supporters */
+.plat-supp-list-title{font-size:var(--fs-xs);font-weight:var(--fw-semibold);text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.3);margin-bottom:var(--sp-4)}
+.plat-supp-row{
+  display:flex;align-items:center;gap:var(--sp-4);
+  padding:var(--sp-3) 0;border-bottom:1px solid var(--p-border);
+}
+.plat-supp-row:last-child{border-bottom:none}
+.plat-supp-avatar{
+  width:30px;height:30px;border-radius:50%;flex-shrink:0;
+  background:var(--p-surface-hi);border:1px solid var(--p-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:rgba(255,255,255,.6);
+}
+.plat-supp-name{font-size:13px;font-weight:var(--fw-medium);color:rgba(255,255,255,.8);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.plat-supp-time{font-size:var(--fs-xs);color:rgba(255,255,255,.28);white-space:nowrap}
+.plat-supp-amt{font-size:13px;font-weight:var(--fw-semibold);color:var(--p-accent);white-space:nowrap}
+
+/* main area section headers */
+.plat-dash-section-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-6)}
+.plat-dash-section-title{font-size:var(--fs-md);font-weight:var(--fw-semibold);color:white;letter-spacing:var(--ls-tight)}
+.btn-plat-sm{
+  height:32px;padding:0 var(--sp-8);border-radius:var(--r-full);border:none;
+  background:var(--p-grad);color:white;font-size:13px;font-weight:var(--fw-semibold);
+  cursor:pointer;transition:opacity var(--tr-fast);
+}
+.btn-plat-sm:hover{opacity:.85}
+
+/* project cards */
+.plat-project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-5);margin-bottom:var(--sp-10)}
+.plat-project-card{
+  background:var(--p-surface);border:1px solid var(--p-border);
+  border-radius:16px;overflow:hidden;transition:border-color var(--tr-fast),transform var(--tr-fast);
+}
+.plat-project-card:hover{border-color:rgba(168,85,247,.3);transform:translateY(-2px)}
+.plat-project-thumb{
+  height:90px;display:flex;align-items:center;justify-content:center;
+  font-size:36px;
+  background:linear-gradient(135deg,rgba(228,77,123,.1),rgba(168,85,247,.1),rgba(99,102,241,.1));
+  border-bottom:1px solid var(--p-border);
+}
+.plat-project-body{padding:var(--sp-6) var(--sp-6)}
+.plat-project-name{font-size:13px;font-weight:var(--fw-semibold);color:white;margin-bottom:var(--sp-3)}
+.plat-project-tags{display:flex;gap:var(--sp-2);margin-bottom:var(--sp-5)}
+.plat-project-tag{
+  font-size:var(--fs-xs);padding:2px 7px;border-radius:var(--r-full);
+  background:rgba(168,85,247,.1);color:#c084fc;border:1px solid rgba(168,85,247,.15);
+}
+.plat-progress-track{height:3px;background:rgba(255,255,255,.07);border-radius:var(--r-full);margin-bottom:var(--sp-4);overflow:hidden}
+.plat-progress-fill{height:100%;border-radius:var(--r-full);background:var(--p-grad)}
+.plat-project-foot{display:flex;align-items:center;justify-content:space-between}
+.plat-project-raised{font-size:13px;font-weight:var(--fw-semibold);color:white}
+.plat-project-pct{font-size:var(--fs-xs);color:var(--p-accent);font-weight:var(--fw-semibold)}
+
+/* leaderboard */
+.plat-lb-wrap{background:var(--p-surface);border:1px solid var(--p-border);border-radius:16px;overflow:hidden}
+.plat-lb-hdr-row,.plat-lb-row{
+  display:grid;grid-template-columns:44px 1fr 80px 90px;
+  align-items:center;padding:var(--sp-4) var(--sp-6);
+}
+.plat-lb-hdr-row{
+  border-bottom:1px solid var(--p-border);
+  font-size:var(--fs-xs);font-weight:var(--fw-semibold);text-transform:uppercase;
+  letter-spacing:.07em;color:rgba(255,255,255,.28);
+}
+.plat-lb-row{border-bottom:1px solid rgba(255,255,255,.04);transition:background var(--tr-fast)}
+.plat-lb-row:last-child{border-bottom:none}
+.plat-lb-row:hover{background:rgba(255,255,255,.03)}
+.plat-rank{
+  width:26px;height:26px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:var(--fs-xs);font-weight:var(--fw-bold);
+}
+.rank-1{background:rgba(255,215,0,.12);color:#FFD700;border:1px solid rgba(255,215,0,.2)}
+.rank-2{background:rgba(192,192,192,.12);color:#C0C0C0;border:1px solid rgba(192,192,192,.2)}
+.rank-3{background:rgba(205,127,50,.12);color:#CD7F32;border:1px solid rgba(205,127,50,.2)}
+.rank-n{background:rgba(255,255,255,.05);color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.08)}
+.plat-lb-user{display:flex;align-items:center;gap:var(--sp-4)}
+.plat-lb-avatar{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  background:var(--p-surface-hi);border:1px solid var(--p-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:rgba(255,255,255,.5);
+}
+.plat-lb-name{font-size:13px;font-weight:var(--fw-medium);color:rgba(255,255,255,.85)}
+.plat-lb-gifts{font-size:13px;color:rgba(255,255,255,.45)}
+.plat-lb-total{font-size:13px;font-weight:var(--fw-semibold);color:var(--p-accent)}
+
 /* ── PLATFORM SUPPORT ── */
 .plat-support-wrap{max-width:800px;margin:0 auto;padding:var(--sp-20) var(--sp-12)}
 .plat-support-search-wrap{position:relative;margin-bottom:var(--sp-16)}
@@ -612,7 +740,7 @@ input.error:focus{box-shadow:0 0 0 3px rgba(239,68,68,.1)}
     <nav class="plat-header-nav">
       <a data-tab="landing" class="active">Overview</a>
       <a data-tab="library">Library</a>
-      <a data-tab="creator">Creator</a>
+      <a data-tab="creator">Dashboard</a>
       <a data-tab="support">Support</a>
     </nav>
     <div class="plat-header-cta">
@@ -690,72 +818,207 @@ input.error:focus{box-shadow:0 0 0 3px rgba(239,68,68,.1)}
        PLATFORM SECTION — CREATOR
   ════════════════════════════════════════ -->
   <section id="plat-creator" class="plat-section">
-    <div class="plat-section-wrap">
-      <div class="plat-section-title">Build your project.</div>
-      <p class="plat-section-sub">Add items from any store, set a funding goal, and share your list with your community in minutes.</p>
+    <div class="plat-dash-layout">
 
-      <div class="plat-creator-grid">
+      <!-- LEFT SIDEBAR -->
+      <aside class="plat-dash-sidebar">
+
+        <!-- Profile -->
+        <div class="plat-creator-profile">
+          <div class="plat-creator-avatar">A</div>
+          <div class="plat-creator-handle">annabella</div>
+          <div class="plat-verified-badge">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1l1.06 1.94L8 3.5l-1.47 1.43.35 2.07L5 6l-1.88.99.35-2.07L2 3.5l1.94-.56L5 1z" fill="#a855f7"/></svg>
+            Verified Creator
+          </div>
+          <div class="plat-creator-rank">Ranked <strong>#3 Globally</strong></div>
+        </div>
+
+        <!-- Stat cards -->
+        <div class="plat-dash-stats">
+          <div class="plat-dash-stat">
+            <div>
+              <div class="plat-dash-stat-label">Total Raised</div>
+              <div class="plat-dash-stat-val">$4,699</div>
+            </div>
+            <div class="plat-dash-stat-ico">💰</div>
+          </div>
+          <div class="plat-dash-stat">
+            <div>
+              <div class="plat-dash-stat-label">Active Items</div>
+              <div class="plat-dash-stat-val">8</div>
+            </div>
+            <div class="plat-dash-stat-ico">🛍</div>
+          </div>
+          <div class="plat-dash-stat">
+            <div>
+              <div class="plat-dash-stat-label">Supporters</div>
+              <div class="plat-dash-stat-val">142</div>
+            </div>
+            <div class="plat-dash-stat-ico">❤️</div>
+          </div>
+        </div>
+
+        <!-- Recent Supporters -->
         <div>
-          <div class="plat-upload-zone">
-            <div class="plat-upload-ico">🛍</div>
-            <div class="plat-upload-title">Add your first item</div>
-            <p class="plat-upload-sub">Paste any product link — Amazon, Etsy, Target, or anywhere else</p>
-            <button class="btn-plat-primary" style="height:36px;font-size:13px">Add item</button>
+          <div class="plat-supp-list-title">Recent Supporters</div>
+          <div class="plat-supp-row">
+            <div class="plat-supp-avatar">BB</div>
+            <div class="plat-supp-name">boogerbill01</div>
+            <div class="plat-supp-time">2m</div>
+            <div class="plat-supp-amt">$499</div>
+          </div>
+          <div class="plat-supp-row">
+            <div class="plat-supp-avatar">TB</div>
+            <div class="plat-supp-name">TheBull963</div>
+            <div class="plat-supp-time">18m</div>
+            <div class="plat-supp-amt">$250</div>
+          </div>
+          <div class="plat-supp-row">
+            <div class="plat-supp-avatar">MR</div>
+            <div class="plat-supp-name">Maxroberts99</div>
+            <div class="plat-supp-time">1hr</div>
+            <div class="plat-supp-amt">$150</div>
+          </div>
+          <div class="plat-supp-row">
+            <div class="plat-supp-avatar">CL</div>
+            <div class="plat-supp-name">cryptolover22</div>
+            <div class="plat-supp-time">3hr</div>
+            <div class="plat-supp-amt">$75</div>
+          </div>
+          <div class="plat-supp-row">
+            <div class="plat-supp-avatar">FS</div>
+            <div class="plat-supp-name">fanatic_sarah</div>
+            <div class="plat-supp-time">5hr</div>
+            <div class="plat-supp-amt">$40</div>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div class="plat-dash-main">
+
+        <!-- My Projects -->
+        <div class="plat-dash-section-hdr">
+          <div class="plat-dash-section-title">My Projects</div>
+          <button class="btn-plat-sm">+ New Project</button>
+        </div>
+
+        <div class="plat-project-grid">
+          <!-- Card 1 -->
+          <div class="plat-project-card">
+            <div class="plat-project-thumb">🎙</div>
+            <div class="plat-project-body">
+              <div class="plat-project-name">Studio Upgrade</div>
+              <div class="plat-project-tags">
+                <span class="plat-project-tag">8 items</span>
+                <span class="plat-project-tag" style="background:rgba(34,197,94,.08);color:#4ade80;border-color:rgba(34,197,94,.15)">Active</span>
+              </div>
+              <div class="plat-progress-track"><div class="plat-progress-fill" style="width:73%"></div></div>
+              <div class="plat-project-foot">
+                <div class="plat-project-raised">$2,336 <span style="color:rgba(255,255,255,.3);font-weight:400;font-size:var(--fs-xs)">/ $3,200</span></div>
+                <div class="plat-project-pct">73%</div>
+              </div>
+            </div>
           </div>
 
-          <div class="plat-workflow" style="margin-top:var(--sp-8)">
-            <div class="plat-step">
-              <div class="plat-step-num">1</div>
-              <div><div class="plat-step-title">Connect your store</div><div class="plat-step-desc">Shopify, Amazon, or any link</div></div>
-              <span class="plat-step-badge" style="margin-left:auto">Done</span>
+          <!-- Card 2 -->
+          <div class="plat-project-card">
+            <div class="plat-project-thumb">👕</div>
+            <div class="plat-project-body">
+              <div class="plat-project-name">Merch Drop S/S</div>
+              <div class="plat-project-tags">
+                <span class="plat-project-tag">5 items</span>
+                <span class="plat-project-tag" style="background:rgba(34,197,94,.08);color:#4ade80;border-color:rgba(34,197,94,.15)">Active</span>
+              </div>
+              <div class="plat-progress-track"><div class="plat-progress-fill" style="width:45%"></div></div>
+              <div class="plat-project-foot">
+                <div class="plat-project-raised">$810 <span style="color:rgba(255,255,255,.3);font-weight:400;font-size:var(--fs-xs)">/ $1,800</span></div>
+                <div class="plat-project-pct">45%</div>
+              </div>
             </div>
-            <div class="plat-step">
-              <div class="plat-step-num">2</div>
-              <div><div class="plat-step-title">Add items</div><div class="plat-step-desc">Build your wishlist or project</div></div>
-              <span class="plat-step-badge">Done</span>
-            </div>
-            <div class="plat-step" style="border-color:rgba(168,85,247,.3)">
-              <div class="plat-step-num">3</div>
-              <div><div class="plat-step-title">Share your page</div><div class="plat-step-desc">Send your link to your community</div></div>
-              <span style="margin-left:auto;font-size:var(--fs-xs);color:#a855f7;font-weight:500">Active</span>
-            </div>
-            <div class="plat-step" style="opacity:.45">
-              <div class="plat-step-num" style="background:transparent;border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.3)">4</div>
-              <div><div class="plat-step-title" style="color:rgba(255,255,255,.45)">Receive gifts</div><div class="plat-step-desc">Fans buy, it ships to you</div></div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="plat-project-card">
+            <div class="plat-project-thumb">✈️</div>
+            <div class="plat-project-body">
+              <div class="plat-project-name">Japan Travel Fund</div>
+              <div class="plat-project-tags">
+                <span class="plat-project-tag">12 items</span>
+                <span class="plat-project-tag">Funded</span>
+              </div>
+              <div class="plat-progress-track"><div class="plat-progress-fill" style="width:28%"></div></div>
+              <div class="plat-project-foot">
+                <div class="plat-project-raised">$1,540 <span style="color:rgba(255,255,255,.3);font-weight:400;font-size:var(--fs-xs)">/ $5,500</span></div>
+                <div class="plat-project-pct">28%</div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div>
-          <div class="plat-preview">
-            <div class="plat-preview-top">🎁</div>
-            <div class="plat-preview-body">
-              <div class="plat-preview-title">Studio Upgrade Project</div>
-              <div class="plat-preview-meta">Active · 3 items · Last gift 4 min ago</div>
-              <div class="plat-row"><span class="plat-row-label">Total raised</span><span class="plat-row-val">$1,240</span></div>
-              <div class="plat-row"><span class="plat-row-label">Supporters</span><span class="plat-row-val">38</span></div>
-              <div class="plat-row"><span class="plat-row-label">Platform fee</span><span class="plat-row-val" style="color:#4ade80">$0.00</span></div>
-              <div class="plat-row"><span class="plat-row-label">Address visible</span><span class="plat-row-val" style="color:#4ade80">Never</span></div>
-            </div>
-          </div>
+        <!-- Top Supporters Leaderboard -->
+        <div class="plat-dash-section-hdr">
+          <div class="plat-dash-section-title">My Top Supporters</div>
+        </div>
 
-          <div style="margin-top:var(--sp-8);background:var(--p-surface);border:1px solid var(--p-border);border-radius:16px;padding:var(--sp-8) var(--sp-10)">
-            <div style="font-size:var(--fs-sm);font-weight:500;color:rgba(255,255,255,.6);margin-bottom:var(--sp-5)">Gift event payload</div>
-            <div class="code-block" style="font-size:11px">{
-  "event": "gift.completed",
-  "item": "Sony WH-1000XM5",
-  "amount": 349.00,
-  "currency": "USD",
-  "timestamp": "2026-06-06T09:41:22Z",
-  "metadata": {
-    "supporter": "boogerbill01",
-    "address_shared": false
-  }
-}</div>
+        <div class="plat-lb-wrap">
+          <div class="plat-lb-hdr-row">
+            <div>#</div>
+            <div>Supporter</div>
+            <div>Gifts</div>
+            <div>Total</div>
+          </div>
+          <div class="plat-lb-row">
+            <div><div class="plat-rank rank-1">1</div></div>
+            <div class="plat-lb-user">
+              <div class="plat-lb-avatar">BB</div>
+              <div class="plat-lb-name">boogerbill01</div>
+            </div>
+            <div class="plat-lb-gifts">12</div>
+            <div class="plat-lb-total">$4,699</div>
+          </div>
+          <div class="plat-lb-row">
+            <div><div class="plat-rank rank-2">2</div></div>
+            <div class="plat-lb-user">
+              <div class="plat-lb-avatar">TB</div>
+              <div class="plat-lb-name">TheBull963</div>
+            </div>
+            <div class="plat-lb-gifts">8</div>
+            <div class="plat-lb-total">$3,710</div>
+          </div>
+          <div class="plat-lb-row">
+            <div><div class="plat-rank rank-3">3</div></div>
+            <div class="plat-lb-user">
+              <div class="plat-lb-avatar">MR</div>
+              <div class="plat-lb-name">Maxroberts99</div>
+            </div>
+            <div class="plat-lb-gifts">6</div>
+            <div class="plat-lb-total">$2,905</div>
+          </div>
+          <div class="plat-lb-row">
+            <div><div class="plat-rank rank-n">4</div></div>
+            <div class="plat-lb-user">
+              <div class="plat-lb-avatar">CL</div>
+              <div class="plat-lb-name">cryptolover22</div>
+            </div>
+            <div class="plat-lb-gifts">4</div>
+            <div class="plat-lb-total">$1,450</div>
+          </div>
+          <div class="plat-lb-row">
+            <div><div class="plat-rank rank-n">5</div></div>
+            <div class="plat-lb-user">
+              <div class="plat-lb-avatar">FS</div>
+              <div class="plat-lb-name">fanatic_sarah</div>
+            </div>
+            <div class="plat-lb-gifts">3</div>
+            <div class="plat-lb-total">$890</div>
           </div>
         </div>
-      </div>
-    </div>
+
+      </div><!-- /plat-dash-main -->
+    </div><!-- /plat-dash-layout -->
   </section>
 
   <!-- ════════════════════════════════════════
