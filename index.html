@@ -620,7 +620,7 @@ input.error:focus{box-shadow:0 0 0 3px rgba(239,68,68,.1)}
   transition:border-color var(--tr-fast);
 }
 .plat-post-project:hover{border-color:rgba(168,85,247,.3)}
-.plat-post-proj-thumb{width:36px;height:36px;border-radius:var(--r-lg);background:#a855f7;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.plat-post-proj-thumb{width:8px;height:8px;border-radius:50%;background:var(--p-accent);flex-shrink:0;margin-top:6px}
 .plat-post-proj-info{flex:1;min-width:0}
 .plat-post-proj-name{font-size:13px;font-weight:var(--fw-medium);color:white;margin-bottom:2px}
 .plat-post-proj-bar{height:3px;background:rgba(255,255,255,.07);border-radius:var(--r-full);overflow:hidden;margin-bottom:3px}
@@ -679,6 +679,41 @@ input.error:focus{box-shadow:0 0 0 3px rgba(239,68,68,.1)}
 .plat-badge.locked:hover{transform:none;border-color:var(--p-border)}
 .plat-badge-ico{font-size:18px;line-height:1}
 .plat-badge-lbl{font-size:9px;color:rgba(255,255,255,.45);line-height:1.3;font-weight:var(--fw-medium)}
+
+/* ── CREATOR NUMS ── */
+.plat-creator-nums{display:flex;align-items:center;padding:var(--sp-6) 0;border-top:1px solid var(--p-border);border-bottom:1px solid var(--p-border)}
+.plat-creator-num{flex:1;text-align:center}
+.plat-creator-num-val{font-size:17px;font-weight:var(--fw-bold);color:white;line-height:1.2}
+.plat-creator-num-lbl{font-size:10px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.plat-creator-num-sep{width:1px;height:26px;background:var(--p-border)}
+
+/* ── PROJECT LIST ── */
+.plat-project-list{display:flex;flex-direction:column;border:1px solid var(--p-border);border-radius:14px;overflow:hidden;margin-bottom:var(--sp-10)}
+.plat-project-row{display:flex;align-items:center;gap:var(--sp-6);padding:var(--sp-5) var(--sp-6);border-bottom:1px solid var(--p-border);transition:background var(--tr-fast)}
+.plat-project-row:last-child{border-bottom:none}
+.plat-project-row:hover{background:rgba(255,255,255,.02)}
+.plat-project-row-left{flex:1;min-width:0}
+.plat-project-row-name{font-size:13px;font-weight:var(--fw-medium);color:rgba(255,255,255,.85);margin-bottom:3px}
+.plat-project-row-meta{font-size:var(--fs-xs);color:rgba(255,255,255,.28);display:flex;align-items:center;gap:5px}
+.plat-project-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.plat-project-dot.ok{background:#4ade80}.plat-project-dot.dim{background:rgba(255,255,255,.2)}
+.plat-project-row-right{display:flex;align-items:center;gap:var(--sp-5);flex-shrink:0}
+.plat-project-row-bar{width:72px}
+.plat-project-row-pct{font-size:var(--fs-xs);color:rgba(255,255,255,.35);width:26px;text-align:right}
+.plat-project-row-amt{font-size:13px;font-weight:var(--fw-semibold);color:white;white-space:nowrap;min-width:54px;text-align:right}
+
+/* ── NEW LINK ── */
+.plat-new-link{font-size:13px;color:rgba(255,255,255,.35);cursor:pointer;transition:color var(--tr-fast)}
+.plat-new-link:hover{color:var(--p-accent)}
+
+/* ── SUPPORTER STATUS LINE ── */
+.plat-status-line{font-size:12px;color:rgba(255,255,255,.38);margin-top:var(--sp-4);line-height:1.5}
+.plat-status-line strong{color:rgba(255,255,255,.7);font-weight:var(--fw-medium)}
+
+/* ── BADGE PILLS ── */
+.plat-badge-row{display:flex;flex-wrap:wrap;gap:var(--sp-2)}
+.plat-badge-pill{display:flex;align-items:center;gap:5px;padding:3px 9px;border-radius:var(--r-full);background:rgba(255,255,255,.05);border:1px solid var(--p-border);font-size:12px;color:rgba(255,255,255,.6);cursor:pointer;transition:all var(--tr-fast)}
+.plat-badge-pill:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
 
 /* ── PLATFORM SUPPORT ── */
 .plat-support-wrap{max-width:800px;margin:0 auto;padding:var(--sp-20) var(--sp-12)}
@@ -1056,28 +1091,21 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
           <div class="plat-creator-rank">Ranked <strong>#3 Globally</strong></div>
         </div>
 
-        <!-- Stat cards -->
-        <div class="plat-dash-stats">
-          <div class="plat-dash-stat">
-            <div>
-              <div class="plat-dash-stat-label">Total Raised</div>
-              <div class="plat-dash-stat-val">$4,699</div>
-            </div>
-            <div class="plat-dash-stat-ico">💰</div>
+        <!-- Stats -->
+        <div class="plat-creator-nums">
+          <div class="plat-creator-num">
+            <div class="plat-creator-num-val">$4,699</div>
+            <div class="plat-creator-num-lbl">raised</div>
           </div>
-          <div class="plat-dash-stat">
-            <div>
-              <div class="plat-dash-stat-label">Active Items</div>
-              <div class="plat-dash-stat-val">8</div>
-            </div>
-            <div class="plat-dash-stat-ico">🛍</div>
+          <div class="plat-creator-num-sep"></div>
+          <div class="plat-creator-num">
+            <div class="plat-creator-num-val">142</div>
+            <div class="plat-creator-num-lbl">supporters</div>
           </div>
-          <div class="plat-dash-stat">
-            <div>
-              <div class="plat-dash-stat-label">Supporters</div>
-              <div class="plat-dash-stat-val">142</div>
-            </div>
-            <div class="plat-dash-stat-ico">❤️</div>
+          <div class="plat-creator-num-sep"></div>
+          <div class="plat-creator-num">
+            <div class="plat-creator-num-val">8</div>
+            <div class="plat-creator-num-lbl">items</div>
           </div>
         </div>
 
@@ -1121,68 +1149,52 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
       <!-- MAIN CONTENT -->
       <div class="plat-dash-main">
 
-        <!-- My Projects -->
+        <!-- Projects -->
         <div class="plat-dash-section-hdr">
-          <div class="plat-dash-section-title">My Projects</div>
-          <button class="btn-plat-sm">+ New Project</button>
+          <div class="plat-dash-section-title">Projects</div>
+          <span class="plat-new-link">+ New</span>
         </div>
 
-        <div class="plat-project-grid">
-          <!-- Card 1 -->
-          <div class="plat-project-card">
-            <div class="plat-project-thumb">🎙</div>
-            <div class="plat-project-body">
-              <div class="plat-project-name">Studio Upgrade</div>
-              <div class="plat-project-tags">
-                <span class="plat-project-tag">8 items</span>
-                <span class="plat-project-tag" style="background:rgba(34,197,94,.08);color:#4ade80;border-color:rgba(34,197,94,.15)">Active</span>
-              </div>
-              <div class="plat-progress-track"><div class="plat-progress-fill" style="width:73%"></div></div>
-              <div class="plat-project-foot">
-                <div class="plat-project-raised">$2,336 <span style="color:rgba(255,255,255,.3);font-weight:400;font-size:var(--fs-xs)">/ $3,200</span></div>
-                <div class="plat-project-pct">73%</div>
-              </div>
+        <div class="plat-project-list">
+          <div class="plat-project-row">
+            <div class="plat-project-row-left">
+              <div class="plat-project-row-name">Studio Upgrade</div>
+              <div class="plat-project-row-meta"><span class="plat-project-dot ok"></span>active · 8 items</div>
+            </div>
+            <div class="plat-project-row-right">
+              <div class="plat-project-row-bar plat-progress-track"><div class="plat-progress-fill" style="width:73%"></div></div>
+              <div class="plat-project-row-pct">73%</div>
+              <div class="plat-project-row-amt">$2,336 <span>/ $3,200</span></div>
             </div>
           </div>
-
-          <!-- Card 2 -->
-          <div class="plat-project-card">
-            <div class="plat-project-thumb">👕</div>
-            <div class="plat-project-body">
-              <div class="plat-project-name">Merch Drop S/S</div>
-              <div class="plat-project-tags">
-                <span class="plat-project-tag">5 items</span>
-                <span class="plat-project-tag" style="background:rgba(34,197,94,.08);color:#4ade80;border-color:rgba(34,197,94,.15)">Active</span>
-              </div>
-              <div class="plat-progress-track"><div class="plat-progress-fill" style="width:45%"></div></div>
-              <div class="plat-project-foot">
-                <div class="plat-project-raised">$810 <span style="color:rgba(255,255,255,.3);font-weight:400;font-size:var(--fs-xs)">/ $1,800</span></div>
-                <div class="plat-project-pct">45%</div>
-              </div>
+          <div class="plat-project-row">
+            <div class="plat-project-row-left">
+              <div class="plat-project-row-name">Merch Drop S/S</div>
+              <div class="plat-project-row-meta"><span class="plat-project-dot ok"></span>active · 5 items</div>
+            </div>
+            <div class="plat-project-row-right">
+              <div class="plat-project-row-bar plat-progress-track"><div class="plat-progress-fill" style="width:45%"></div></div>
+              <div class="plat-project-row-pct">45%</div>
+              <div class="plat-project-row-amt">$810 <span>/ $1,800</span></div>
             </div>
           </div>
-
-          <!-- Card 3 -->
-          <div class="plat-project-card">
-            <div class="plat-project-thumb">✈️</div>
-            <div class="plat-project-body">
-              <div class="plat-project-name">Japan Travel Fund</div>
-              <div class="plat-project-tags">
-                <span class="plat-project-tag">12 items</span>
-                <span class="plat-project-tag">Funded</span>
-              </div>
-              <div class="plat-progress-track"><div class="plat-progress-fill" style="width:28%"></div></div>
-              <div class="plat-project-foot">
-                <div class="plat-project-raised">$1,540 <span style="color:rgba(255,255,255,.3);font-weight:400;font-size:var(--fs-xs)">/ $5,500</span></div>
-                <div class="plat-project-pct">28%</div>
-              </div>
+          <div class="plat-project-row">
+            <div class="plat-project-row-left">
+              <div class="plat-project-row-name">Japan Travel Fund</div>
+              <div class="plat-project-row-meta"><span class="plat-project-dot dim"></span>funded · 12 items</div>
+            </div>
+            <div class="plat-project-row-right">
+              <div class="plat-project-row-bar plat-progress-track"><div class="plat-progress-fill" style="width:28%"></div></div>
+              <div class="plat-project-row-pct">28%</div>
+              <div class="plat-project-row-amt">$1,540 <span>/ $5,500</span></div>
             </div>
           </div>
         </div>
 
-        <!-- Top Supporters Leaderboard -->
+        <!-- Top Supporters -->
         <div class="plat-dash-section-hdr">
-          <div class="plat-dash-section-title">My Top Supporters</div>
+          <div class="plat-dash-section-title">Top supporters</div>
+          <span style="font-size:12px;color:rgba(255,255,255,.28)">all time</span>
         </div>
 
         <div class="plat-lb-wrap">
@@ -1285,7 +1297,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
             <button class="plat-action-btn">↗ Share</button>
           </div>
           <div class="plat-post-project">
-            <div class="plat-post-proj-thumb">🎙</div>
+            <div class="plat-post-proj-thumb"></div>
             <div class="plat-post-proj-info">
               <div class="plat-post-proj-name">Studio Upgrade</div>
               <div class="plat-post-proj-bar"><div class="plat-post-proj-fill" style="width:73%"></div></div>
@@ -1298,7 +1310,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
         <!-- Post 2 -->
         <div class="plat-post-card">
           <div class="plat-post-header">
-            <div class="plat-post-avatar" style="background:linear-gradient(135deg,#9146ff,#6441a5)">M</div>
+            <div class="plat-post-avatar" style="background:#5c34a4">M</div>
             <div class="plat-post-author">
               <div class="plat-post-name">techbro_mike</div>
               <div class="plat-post-meta">
@@ -1322,7 +1334,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
             <button class="plat-action-btn">↗ Share</button>
           </div>
           <div class="plat-post-project">
-            <div class="plat-post-proj-thumb">✈️</div>
+            <div class="plat-post-proj-thumb"></div>
             <div class="plat-post-proj-info">
               <div class="plat-post-proj-name">Japan Travel Fund</div>
               <div class="plat-post-proj-bar"><div class="plat-post-proj-fill" style="width:28%"></div></div>
@@ -1335,7 +1347,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
         <!-- Post 3 -->
         <div class="plat-post-card">
           <div class="plat-post-header">
-            <div class="plat-post-avatar" style="background:linear-gradient(135deg,#e4405f,#fd1d1d,#f77737)">C</div>
+            <div class="plat-post-avatar" style="background:#b53a5a">C</div>
             <div class="plat-post-author">
               <div class="plat-post-name">cryptoartist_val</div>
               <div class="plat-post-meta">
@@ -1345,22 +1357,14 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
             </div>
             <div class="plat-post-time">2hr ago</div>
           </div>
-          <p class="plat-post-caption">spring merch teaser 🌸 first drop ships when we hit 50% — we're close! tag someone who needs this in their wardrobe</p>
-          <div class="plat-post-media">
-            <div class="plat-play-btn">▶</div>
-            <div class="plat-media-stats">
-              <span class="plat-media-stat">👁 61K</span>
-              <span class="plat-media-stat">♥ 9.2K</span>
-              <span class="plat-media-stat">💬 412</span>
-            </div>
-          </div>
-          <div class="plat-post-actions">
+          <p class="plat-post-caption">spring merch teaser — first drop ships when we hit 50%, we're so close. tag someone who needs this in their wardrobe.</p>
+          <div class="plat-post-actions" style="padding-top:0">
             <button class="plat-action-btn">♥ 9,201</button>
             <button class="plat-action-btn">💬 412</button>
             <button class="plat-action-btn">↗ Share</button>
           </div>
           <div class="plat-post-project">
-            <div class="plat-post-proj-thumb">👕</div>
+            <div class="plat-post-proj-thumb"></div>
             <div class="plat-post-proj-info">
               <div class="plat-post-proj-name">Merch Drop S/S</div>
               <div class="plat-post-proj-bar"><div class="plat-post-proj-fill" style="width:45%"></div></div>
@@ -1372,87 +1376,56 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 
       </div><!-- /plat-feed-col -->
 
-      <!-- GAMIFICATION SIDEBAR -->
+      <!-- SIDEBAR -->
       <div class="plat-gam-col">
 
-        <!-- Supporter mini profile -->
+        <!-- Profile + status -->
         <div class="plat-gam-card">
           <div class="plat-supp-mini">
             <div class="plat-supp-mini-avatar">BB</div>
             <div class="plat-supp-mini-info">
               <div class="plat-supp-mini-name">boogerbill01</div>
-              <div class="plat-supp-mini-rank">🏆 Ranked #1 Supporter</div>
+              <div class="plat-supp-mini-rank">#1 Supporter</div>
             </div>
+            <div style="font-size:18px;font-weight:700;color:white;margin-left:auto">$4,699</div>
           </div>
-          <div class="plat-supp-mini-stats">
-            <div><div class="plat-supp-mini-stat-val">$4,699</div><div class="plat-supp-mini-stat-lbl">Gifted</div></div>
-            <div><div class="plat-supp-mini-stat-val">8</div><div class="plat-supp-mini-stat-lbl">Following</div></div>
-            <div><div class="plat-supp-mini-stat-val">#1</div><div class="plat-supp-mini-stat-lbl">Best Rank</div></div>
-          </div>
+          <div class="plat-status-line"><strong>Lv.7</strong> · 🔥 14 streak · Diamond · 2,340 XP</div>
+          <div class="plat-xp-track" style="margin-top:var(--sp-4)"><div class="plat-xp-fill" style="width:78%"></div></div>
+          <div class="plat-xp-sub" style="margin-top:var(--sp-3)">660 XP to Level 8</div>
         </div>
 
-        <!-- XP / Level -->
+        <!-- Today -->
         <div class="plat-gam-card">
-          <div class="plat-gam-title">Level & XP</div>
-          <div class="plat-xp-row">
-            <div class="plat-xp-level">Level 7</div>
-            <div class="plat-xp-badge">🔥 2× XP active</div>
-          </div>
-          <div class="plat-xp-track"><div class="plat-xp-fill" style="width:78%"></div></div>
-          <div class="plat-xp-sub">2,340 / 3,000 XP · 660 XP to Level 8</div>
-          <div class="plat-meta-row" style="margin-top:var(--sp-5)">
-            <div class="plat-meta-pill">
-              <div class="plat-meta-pill-val">🔥 14</div>
-              <div class="plat-meta-pill-lbl">Day Streak</div>
-            </div>
-            <div class="plat-meta-pill">
-              <div class="plat-meta-pill-val">💎</div>
-              <div class="plat-meta-pill-lbl">Diamond League</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Daily Quests -->
-        <div class="plat-gam-card">
-          <div class="plat-gam-title">Daily Quests</div>
+          <div class="plat-gam-title">Today</div>
           <div class="plat-quest">
             <div class="plat-quest-check done">✓</div>
             <div class="plat-quest-label">Gift to a new creator</div>
-            <span class="plat-quest-diff diff-easy">Easy</span>
-            <span class="plat-quest-xp">+25 XP</span>
+            <span class="plat-quest-xp">+25</span>
           </div>
           <div class="plat-quest">
             <div class="plat-quest-check done">✓</div>
-            <div class="plat-quest-label">Support 3 projects today</div>
-            <span class="plat-quest-diff diff-med">Med</span>
-            <span class="plat-quest-xp">+50 XP</span>
+            <div class="plat-quest-label">Support 3 projects</div>
+            <span class="plat-quest-xp">+50</span>
           </div>
           <div class="plat-quest">
             <div class="plat-quest-check todo"></div>
-            <div class="plat-quest-label">Send $100+ in one gift</div>
-            <span class="plat-quest-diff diff-hard">Hard</span>
-            <span class="plat-quest-xp">+100 XP</span>
+            <div class="plat-quest-label">Gift $100+ in one go</div>
+            <span class="plat-quest-xp">+100</span>
           </div>
-          <div class="plat-quest-bar"><div class="plat-quest-bar-fill"></div></div>
-          <div style="font-size:var(--fs-xs);color:rgba(255,255,255,.28);margin-top:var(--sp-3)">2 / 3 complete · +75 XP earned today</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.25);margin-top:var(--sp-5)">+75 XP earned today · 2 of 3 done</div>
         </div>
 
         <!-- Badges -->
         <div class="plat-gam-card">
-          <div class="plat-gam-title">Badges</div>
-          <div class="plat-badge-grid">
-            <div class="plat-badge"><div class="plat-badge-ico">🌟</div><div class="plat-badge-lbl">Early Adopter</div></div>
-            <div class="plat-badge"><div class="plat-badge-ico">🔥</div><div class="plat-badge-lbl">Streak Lord</div></div>
-            <div class="plat-badge"><div class="plat-badge-ico">💸</div><div class="plat-badge-lbl">Big Spender</div></div>
-            <div class="plat-badge"><div class="plat-badge-ico">🎁</div><div class="plat-badge-lbl">First Gift</div></div>
-            <div class="plat-badge"><div class="plat-badge-ico">👑</div><div class="plat-badge-lbl">League Leader</div></div>
-            <div class="plat-badge"><div class="plat-badge-ico">🎰</div><div class="plat-badge-lbl">Jackpot</div></div>
-            <div class="plat-badge"><div class="plat-badge-ico">💎</div><div class="plat-badge-lbl">Diamond Gifter</div></div>
-            <div class="plat-badge locked"><div class="plat-badge-ico">⚡</div><div class="plat-badge-lbl">Speed Gifter</div></div>
-            <div class="plat-badge locked"><div class="plat-badge-ico">💯</div><div class="plat-badge-lbl">Century Club</div></div>
-            <div class="plat-badge locked"><div class="plat-badge-ico">🎨</div><div class="plat-badge-lbl">Variety Pack</div></div>
-            <div class="plat-badge locked"><div class="plat-badge-ico">???</div><div class="plat-badge-lbl">Mystery</div></div>
-            <div class="plat-badge locked"><div class="plat-badge-ico">???</div><div class="plat-badge-lbl">Mystery</div></div>
+          <div class="plat-gam-title">Badges · 7 earned</div>
+          <div class="plat-badge-row">
+            <div class="plat-badge-pill">🌟 Early Adopter</div>
+            <div class="plat-badge-pill">🔥 Streak Lord</div>
+            <div class="plat-badge-pill">💸 Big Spender</div>
+            <div class="plat-badge-pill">🎁 First Gift</div>
+            <div class="plat-badge-pill">👑 League Leader</div>
+            <div class="plat-badge-pill">🎰 Jackpot</div>
+            <div class="plat-badge-pill">💎 Diamond Gifter</div>
           </div>
         </div>
 
