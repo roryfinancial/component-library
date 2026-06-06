@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rory Design System — Keystone · rory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --black:#0f0f10; --g50:#fafaf9; --g100:#f3f2f0; --g200:#e6e4e1;
+  --g300:#d0cdc8; --g400:#9c9890; --g500:#6e6a62; --g600:#4a4740;
+  --g800:#22201c; --g900:#181714;
+  --accent:#6B2039; --accent-hover:#7C2D45; --accent-soft:#fdf2f4;
+  --accent-bd:#f5c6cf; --accent-fg:#5a1a30; --accent-muted:#3d1522;
+  --ok:#22c55e; --ok-soft:#f0fdf4; --ok-bd:#bbf7d0; --ok-fg:#15803d;
+  --deg:#f59e0b; --deg-soft:#fffbeb; --deg-bd:#fde68a; --deg-fg:#b45309;
+  --out:#ef4444; --out-soft:#fef2f2; --out-bd:#fecaca; --out-fg:#b91c1c;
+  --maint:#6366f1; --maint-soft:#eef2ff; --maint-bd:#c7d2fe; --maint-fg:#4338ca;
+  --info:#3b82f6; --info-soft:#eff6ff; --info-bd:#bfdbfe; --info-fg:#1d4ed8;
+  --sidebar-bg:#131214; --sidebar-border:rgba(255,255,255,.06);
+  --sidebar-text:rgba(255,255,255,.5); --sidebar-text-hi:rgba(255,255,255,.9);
+  --sidebar-hover:rgba(255,255,255,.05); --sidebar-active:rgba(255,255,255,.08);
+  --font-sans:'Inter',system-ui,sans-serif;
+  --font-mono:'SF Mono','Fira Code',ui-monospace,monospace;
+  --fs-xs:11px; --fs-sm:12px; --fs-base:14px;
+  --fs-md:16px; --fs-lg:18px; --fs-2xl:28px;
+  --fw-light:300; --fw-regular:400; --fw-medium:500; --fw-semibold:600; --fw-bold:700;
+  --ls-tight:-.01em; --ls-normal:0; --ls-wide:.04em; --ls-wider:.08em;
+  --sp-1:2px; --sp-2:4px; --sp-3:6px; --sp-4:8px; --sp-5:10px; --sp-6:12px;
+  --sp-7:14px; --sp-8:16px; --sp-10:20px; --sp-12:24px; --sp-16:32px; --sp-20:40px; --sp-24:48px;
+  --r-sm:4px; --r-md:6px; --r-lg:10px; --r-xl:12px; --r-2xl:14px; --r-full:999px;
+  --shadow-xs:0 1px 2px rgba(0,0,0,.05);
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);
+  --shadow-xl:0 20px 48px rgba(0,0,0,.12),0 8px 16px rgba(0,0,0,.06);
+  --tr-fast:.1s ease; --tr-base:.15s ease; --tr-slow:.25s ease;
+  --btn-h:36px; --btn-h-sm:28px; --input-h:36px; --topbar-h:52px;
+  --sidebar-w:232px; --page-max:1120px;
+  --border:1px solid var(--g200); --border-light:1px solid var(--g100);
+}
+
+/* ── PLATFORM OVERRIDES ── */
+.shell.platform {
+  --p-bg:#0b0b10; --p-surface:#141419; --p-surface-hi:#1c1c24;
+  --p-border:rgba(255,255,255,.06); --p-border-hi:rgba(255,255,255,.10);
+  --p-text:rgba(255,255,255,.88); --p-text-sec:rgba(255,255,255,.50);
+  --p-text-dim:rgba(255,255,255,.30);
+  --p-accent:#a855f7; --p-accent-hover:#9333ea;
+  --p-accent-glow:rgba(168,85,247,.15);
+  --p-grad:linear-gradient(135deg,#e44d7b,#a855f7,#6366f1);
+}
+
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--font-sans);font-size:var(--fs-base);color:var(--black);background:var(--g100)}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:var(--fs-base)}
+
+/* ── SHELL ── */
+.shell{min-height:100vh;background:var(--g100)}
+.shell.platform{background:var(--p-bg)}
+
+/* ── CORP SECTIONS ── */
+.corp-sections{display:flex;min-height:100vh}
+.shell.platform .corp-sections{display:none}
+.shell.platform.plat-lib .corp-sections{display:flex}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sidebar-w);background:var(--sidebar-bg);
+  position:sticky;top:0;height:100vh;
+  display:flex;flex-direction:column;flex-shrink:0;
+  overflow-y:auto;border-right:1px solid var(--sidebar-border);
+}
+.shell.platform .sidebar{display:none}
+
+.sidebar-brand{
+  padding:var(--sp-6) var(--sp-5);
+  display:flex;align-items:center;gap:var(--sp-5);
+  border-bottom:1px solid var(--sidebar-border);
+  flex-shrink:0;
+}
+.brand-corp-name span{
+  font-size:10px;font-weight:var(--fw-bold);
+  color:var(--sidebar-text-hi);letter-spacing:.14em;
+  text-transform:uppercase;display:block;line-height:1.3;
+}
+.brand-corp-name span:nth-child(2){color:rgba(255,255,255,.55)}
+.brand-corp-name span:nth-child(3){color:rgba(255,255,255,.38);letter-spacing:.18em}
+
+.sidebar-nav{padding:var(--sp-5) var(--sp-4);flex:1}
+.sidebar-section-label{
+  font-size:10px;font-weight:var(--fw-semibold);
+  text-transform:uppercase;letter-spacing:var(--ls-wider);
+  color:rgba(255,255,255,.22);padding:var(--sp-5) var(--sp-4) var(--sp-2);
+}
+.nav-item{
+  display:flex;align-items:center;gap:var(--sp-4);
+  padding:7px var(--sp-5);border-radius:var(--r-md);
+  font-size:13px;color:var(--sidebar-text);
+  border-left:2px solid transparent;margin-left:2px;margin-bottom:1px;
+  transition:background var(--tr-fast),color var(--tr-fast);
+}
+.nav-item:hover{background:var(--sidebar-hover);color:var(--sidebar-text-hi);cursor:pointer}
+.nav-item.active{
+  background:var(--sidebar-active);color:var(--sidebar-text-hi);
+  font-weight:var(--fw-medium);border-left-color:var(--accent);
+}
+.nav-badge{
+  margin-left:auto;background:rgba(239,68,68,.15);color:#f87171;
+  font-size:10px;font-weight:var(--fw-semibold);
+  padding:1px 6px;border-radius:var(--r-full);border:1px solid rgba(239,68,68,.2);
+}
+.sidebar-footer{
+  padding:var(--sp-6) var(--sp-5);border-top:1px solid var(--sidebar-border);
+  display:flex;align-items:center;gap:var(--sp-4);flex-shrink:0;
+}
+.avatar-sm{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--accent-muted);display:flex;align-items:center;justify-content:center;
+  font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:rgba(255,255,255,.8);flex-shrink:0;
+}
+.sidebar-user-name{font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--sidebar-text-hi);line-height:1.3}
+.sidebar-user-role{font-size:var(--fs-xs);color:rgba(255,255,255,.32);line-height:1.3}
+
+/* ── MAIN WRAP ── */
+.main-wrap{flex:1;display:flex;flex-direction:column;min-width:0;background:var(--g100)}
+.shell.platform .main-wrap{background:var(--p-bg)}
+
+/* ── TOPBAR ── */
+.topbar{
+  height:var(--topbar-h);background:white;border-bottom:var(--border);
+  display:flex;align-items:center;padding:0 var(--sp-8);gap:var(--sp-6);
+  position:sticky;top:0;z-index:5;flex-shrink:0;
+}
+.shell.platform .topbar{display:none}
+
+.topbar-breadcrumb{display:flex;align-items:center;gap:var(--sp-3);font-size:13px;color:var(--g500)}
+.topbar-breadcrumb .sep{color:var(--g300)}
+.topbar-breadcrumb strong{color:var(--black);font-weight:var(--fw-medium)}
+.topbar-search{flex:1;max-width:260px;position:relative}
+.topbar-search input{
+  width:100%;height:30px;background:var(--g50);border:var(--border);
+  border-radius:var(--r-md);padding:0 var(--sp-5) 0 28px;
+  font-size:var(--fs-sm);color:var(--black);transition:all var(--tr-fast);
+}
+.topbar-search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(107,32,57,.08)}
+.topbar-search input::placeholder{color:var(--g400)}
+.topbar-search-ico{
+  position:absolute;left:8px;top:50%;transform:translateY(-50%);
+  color:var(--g400);pointer-events:none;
+}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:var(--sp-5)}
+.topbar-avatar{
+  width:30px;height:30px;border-radius:50%;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:var(--fs-xs);font-weight:var(--fw-bold);color:white;cursor:pointer;
+}
+
+/* ── MAIN / PAGE ── */
+.main{flex:1;overflow-y:auto}
+.shell.platform .main{background:var(--p-bg)}
+.page{
+  max-width:var(--page-max);margin:0 auto;
+  padding:var(--sp-20) var(--sp-10) var(--sp-24);
+  display:flex;flex-direction:column;gap:var(--sp-8);
+}
+.shell.platform .main>.page{display:none}
+.shell.platform.plat-lib .main>.page{display:flex}
+
+/* ── PLATFORM HEADER ── */
+.plat-header{
+  display:none;position:sticky;top:0;z-index:10;height:60px;
+  background:rgba(11,11,16,.85);
+  backdrop-filter:blur(20px) saturate(1.4);
+  -webkit-backdrop-filter:blur(20px) saturate(1.4);
+  border-bottom:1px solid var(--p-border);
+  align-items:center;justify-content:space-between;padding:0 var(--sp-12);
+}
+.shell.platform .plat-header{display:flex}
+.plat-logo{display:flex;align-items:center;gap:var(--sp-4)}
+.plat-wordmark{font-size:var(--fs-md);font-weight:var(--fw-bold);color:white;letter-spacing:var(--ls-tight)}
+.plat-header-nav{display:flex;align-items:center;gap:var(--sp-2)}
+.plat-header-nav a{
+  padding:var(--sp-3) var(--sp-6);border-radius:var(--r-full);
+  font-size:13px;font-weight:var(--fw-medium);color:rgba(255,255,255,.45);
+  transition:all var(--tr-fast);cursor:pointer;
+}
+.plat-header-nav a:hover{color:rgba(255,255,255,.8);background:rgba(255,255,255,.05)}
+.plat-header-nav a.active{color:white;background:rgba(255,255,255,.08)}
+.plat-header-cta{display:flex;align-items:center;gap:var(--sp-4)}
+
+/* ── TYPOGRAPHY ── */
+.type-page-title{font-size:var(--fs-lg);font-weight:var(--fw-semibold);letter-spacing:var(--ls-tight);line-height:1.25}
+.type-section-title{font-size:var(--fs-base);font-weight:var(--fw-semibold);letter-spacing:var(--ls-tight)}
+.type-category{font-size:10px;font-weight:var(--fw-semibold);text-transform:uppercase;letter-spacing:var(--ls-wider);color:var(--g400)}
+.type-mono{font-family:var(--font-mono);font-size:var(--fs-sm);color:var(--g500)}
+.stat-num{font-size:var(--fs-2xl);font-weight:var(--fw-light);letter-spacing:var(--ls-tight);line-height:1}
+
+/* ── BUTTONS ── */
+.btn{
+  height:var(--btn-h);padding:0 var(--sp-7);border-radius:var(--r-md);
+  border:1px solid transparent;font-size:13px;font-weight:var(--fw-medium);
+  display:inline-flex;align-items:center;gap:var(--sp-3);
+  transition:all var(--tr-fast);cursor:pointer;font-family:inherit;white-space:nowrap;
+}
+.btn-primary{background:var(--black);color:white}
+.btn-primary:hover{background:var(--g800)}
+.btn-secondary{background:white;color:var(--black);border-color:var(--g200)}
+.btn-secondary:hover{background:var(--g50);border-color:var(--g300)}
+.btn-accent{background:var(--accent);color:white}
+.btn-accent:hover{background:var(--accent-hover)}
+.btn-ghost{
+  height:auto;padding:var(--sp-2) var(--sp-4);
+  border-color:var(--g200);font-size:var(--fs-sm);
+  border-radius:var(--r-sm);background:transparent;color:var(--g600);
+}
+.btn-ghost:hover{background:var(--g50);border-color:var(--g300);color:var(--black)}
+.btn-sm{height:var(--btn-h-sm);font-size:var(--fs-sm);padding:0 var(--sp-6)}
+
+.shell.platform .btn{border-radius:var(--r-full)}
+.shell.platform .btn-primary{background:linear-gradient(135deg,#a855f7,#7c3aed)}
+.shell.platform .btn-primary:hover{background:linear-gradient(135deg,#9333ea,#6d28d9);box-shadow:0 0 16px rgba(168,85,247,.2)}
+.shell.platform .btn-secondary{background:rgba(255,255,255,.05);color:rgba(255,255,255,.8);border-color:var(--p-border-hi)}
+.shell.platform .btn-secondary:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+
+/* ── CARDS ── */
+.card{background:white;border:var(--border);border-radius:var(--r-lg);padding:var(--sp-12);box-shadow:var(--shadow-xs)}
+.shell.platform .card{background:var(--p-surface);border:1px solid var(--p-border);border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.2)}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-8)}
+
+.list-card{background:white;border:var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-xs)}
+.list-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:var(--sp-6) var(--sp-8);border-bottom:var(--border-light);
+  transition:background var(--tr-fast);
+}
+.list-row:last-child{border-bottom:none}
+.list-row:hover{background:var(--g50)}
+.shell.platform .list-card{background:var(--p-surface);border:1px solid var(--p-border);border-radius:16px}
+.shell.platform .list-row{border-bottom-color:var(--p-border)}
+.shell.platform .list-row:hover{background:rgba(255,255,255,.03)}
+
+/* ── STATUS ── */
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot-sm{width:5px;height:5px}
+.dot-ok{background:var(--ok)} .dot-deg{background:var(--deg)}
+.dot-out{background:var(--out)} .dot-maint{background:var(--maint)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.dot-pulse{animation:pulse 1.5s ease-in-out infinite}
+
+.badge{display:inline-flex;align-items:center;gap:var(--sp-2);padding:2px var(--sp-4);border-radius:var(--r-full);font-size:var(--fs-sm);font-weight:var(--fw-medium)}
+.badge-ok{background:var(--ok-soft);color:var(--ok-fg);border:1px solid var(--ok-bd)}
+.badge-deg{background:var(--deg-soft);color:var(--deg-fg);border:1px solid var(--deg-bd)}
+.badge-out{background:var(--out-soft);color:var(--out-fg);border:1px solid var(--out-bd)}
+.badge-maint{background:var(--maint-soft);color:var(--maint-fg);border:1px solid var(--maint-bd)}
+.badge-info{background:var(--info-soft);color:var(--info-fg);border:1px solid var(--info-bd)}
+.badge-neutral{background:var(--g50);color:var(--g600);border:1px solid var(--g200)}
+
+.shell.platform .badge-ok{background:rgba(34,197,94,.1);color:#4ade80;border-color:rgba(34,197,94,.2)}
+.shell.platform .badge-deg{background:rgba(245,158,11,.1);color:#fbbf24;border-color:rgba(245,158,11,.2)}
+.shell.platform .badge-out{background:rgba(239,68,68,.1);color:#f87171;border-color:rgba(239,68,68,.2)}
+.shell.platform .badge-maint{background:rgba(99,102,241,.1);color:#818cf8;border-color:rgba(99,102,241,.2)}
+.shell.platform .badge-neutral{background:rgba(255,255,255,.05);color:rgba(255,255,255,.5);border-color:var(--p-border)}
+
+/* ── FORMS ── */
+input[type=text],input[type=email],input[type=password],input[type=search],select,textarea{
+  height:var(--input-h);padding:0 var(--sp-5);border:var(--border);
+  border-radius:var(--r-md);background:white;color:var(--black);
+  font-size:var(--fs-base);transition:all var(--tr-fast);width:100%;
+}
+textarea{height:auto;padding:var(--sp-5);resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(107,32,57,.08)}
+input::placeholder{color:var(--g400)}
+input.error{border-color:var(--out)}
+input.error:focus{box-shadow:0 0 0 3px rgba(239,68,68,.1)}
+.form-label{font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--g600);display:block;margin-bottom:var(--sp-3)}
+.form-group{margin-bottom:var(--sp-8)}
+.input-hint{font-size:var(--fs-xs);color:var(--g500);margin-top:var(--sp-3)}
+
+/* ── CODE BLOCK ── */
+.code-block{
+  background:var(--g900);border-radius:var(--r-lg);padding:var(--sp-8);
+  font-family:var(--font-mono);font-size:var(--fs-sm);color:rgba(255,255,255,.7);
+  line-height:1.65;overflow-x:auto;white-space:pre;
+}
+.shell.platform .code-block{background:#08080c;border:1px solid var(--p-border)}
+
+/* ── STATS GRID ── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-5)}
+.stat-card{background:white;border:var(--border);border-radius:var(--r-lg);padding:var(--sp-8) var(--sp-10);box-shadow:var(--shadow-xs)}
+.shell.platform .stat-card{background:var(--p-surface);border:1px solid var(--p-border);border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.2)}
+.stat-label{font-size:var(--fs-sm);color:var(--g500);margin-bottom:var(--sp-4);font-weight:var(--fw-medium)}
+.stat-sub{font-size:var(--fs-xs);color:var(--g400);margin-top:var(--sp-3)}
+.stat-delta{font-size:var(--fs-xs);font-weight:var(--fw-medium);color:var(--ok-fg)}
+.stat-delta.neg{color:var(--out-fg)}
+
+.shell.platform .stat-card .stat-label{color:var(--p-text-sec)}
+.shell.platform .stat-card .stat-num{color:var(--p-text)}
+.shell.platform .stat-card .stat-delta{color:#4ade80}
+.shell.platform .stat-card .stat-delta.neg{color:#f87171}
+.shell.platform .stat-card .stat-sub{color:var(--p-text-dim)}
+
+/* ── PLATFORM SECTION VISIBILITY ── */
+.plat-section{display:none}
+.plat-section.active{display:block}
+
+/* ── PLATFORM LANDING ── */
+.plat-landing-wrap{min-height:calc(100vh - 60px);overflow:hidden}
+
+.plat-hero{
+  min-height:80vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:var(--sp-24) var(--sp-12) var(--sp-20);position:relative;
+}
+.plat-glow-orb{
+  position:absolute;width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(168,85,247,.11) 0%,transparent 65%);
+  top:50%;left:50%;transform:translate(-50%,-58%);pointer-events:none;
+}
+.plat-glow-orb2{
+  position:absolute;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(228,77,123,.07) 0%,transparent 65%);
+  top:60%;left:35%;transform:translate(-50%,-50%);pointer-events:none;
+}
+
+.plat-eyebrow{
+  display:inline-flex;align-items:center;gap:var(--sp-3);
+  padding:var(--sp-2) var(--sp-6);border-radius:var(--r-full);
+  background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2);
+  font-size:var(--fs-sm);font-weight:var(--fw-medium);color:#c084fc;
+  margin-bottom:var(--sp-10);position:relative;
+}
+.plat-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#a855f7;animation:pulse 2s ease-in-out infinite}
+
+.plat-hero-title{
+  font-size:clamp(44px,9vw,88px);font-weight:var(--fw-bold);
+  letter-spacing:-.03em;line-height:1.03;color:white;
+  margin-bottom:var(--sp-8);max-width:760px;position:relative;
+}
+.grad{
+  background:var(--p-grad);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+}
+.plat-hero-sub{
+  font-size:var(--fs-lg);color:rgba(255,255,255,.48);font-weight:var(--fw-regular);
+  line-height:1.65;max-width:500px;margin-bottom:var(--sp-16);position:relative;
+}
+.plat-cta-group{display:flex;align-items:center;gap:var(--sp-5);position:relative}
+
+.btn-plat-primary{
+  height:46px;padding:0 var(--sp-10);border-radius:var(--r-full);border:none;
+  background:linear-gradient(135deg,#a855f7,#7c3aed);color:white;
+  font-size:var(--fs-base);font-weight:var(--fw-semibold);
+  display:inline-flex;align-items:center;gap:var(--sp-3);cursor:pointer;
+  transition:all var(--tr-base);font-family:inherit;
+}
+.btn-plat-primary:hover{
+  background:linear-gradient(135deg,#9333ea,#6d28d9);
+  box-shadow:0 0 28px rgba(168,85,247,.28);transform:translateY(-1px);
+}
+.btn-plat-ghost{
+  height:46px;padding:0 var(--sp-10);border-radius:var(--r-full);
+  border:1px solid rgba(255,255,255,.12);background:transparent;
+  color:rgba(255,255,255,.65);font-size:var(--fs-base);font-weight:var(--fw-medium);
+  cursor:pointer;transition:all var(--tr-fast);font-family:inherit;
+}
+.btn-plat-ghost:hover{border-color:rgba(255,255,255,.22);color:white;background:rgba(255,255,255,.04)}
+
+.plat-features{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-5);
+  max-width:1000px;margin:0 auto var(--sp-10);padding:0 var(--sp-12);
+}
+.plat-feat-card{
+  background:var(--p-surface);border:1px solid var(--p-border);
+  border-radius:20px;padding:var(--sp-12);
+  transition:border-color var(--tr-base),transform var(--tr-base);
+}
+.plat-feat-card:hover{border-color:var(--p-border-hi);transform:translateY(-2px)}
+.plat-feat-icon{
+  width:42px;height:42px;border-radius:var(--r-xl);
+  background:var(--p-accent-glow);border:1px solid rgba(168,85,247,.2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:var(--sp-8);font-size:18px;
+}
+.plat-feat-title{font-size:var(--fs-md);font-weight:var(--fw-semibold);color:white;letter-spacing:var(--ls-tight);margin-bottom:var(--sp-4)}
+.plat-feat-desc{font-size:13px;color:rgba(255,255,255,.42);line-height:1.65}
+
+.plat-stats-strip{
+  display:flex;align-items:center;justify-content:center;gap:var(--sp-20);
+  padding:var(--sp-16) var(--sp-12) var(--sp-24);max-width:900px;margin:0 auto;
+}
+.plat-stat-item{text-align:center}
+.plat-stat-num{
+  font-size:40px;font-weight:var(--fw-bold);color:white;letter-spacing:-.025em;
+  background:var(--p-grad);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+}
+.plat-stat-label{font-size:var(--fs-sm);color:rgba(255,255,255,.38);margin-top:var(--sp-2)}
+.plat-stat-div{width:1px;height:44px;background:rgba(255,255,255,.07)}
+
+/* ── PLATFORM CREATOR ── */
+.plat-section-wrap{max-width:960px;margin:0 auto;padding:var(--sp-20) var(--sp-12)}
+.plat-section-title{font-size:30px;font-weight:var(--fw-bold);color:white;letter-spacing:-.02em;margin-bottom:var(--sp-4)}
+.plat-section-sub{font-size:var(--fs-base);color:rgba(255,255,255,.42);margin-bottom:var(--sp-12);line-height:1.6}
+
+.plat-creator-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-8)}
+.plat-upload-zone{
+  border:2px dashed rgba(168,85,247,.22);border-radius:20px;
+  background:rgba(168,85,247,.04);padding:var(--sp-24) var(--sp-12);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:var(--sp-5);cursor:pointer;transition:all var(--tr-base);
+}
+.plat-upload-zone:hover{border-color:rgba(168,85,247,.45);background:rgba(168,85,247,.07)}
+.plat-upload-ico{
+  width:50px;height:50px;border-radius:var(--r-xl);
+  background:var(--p-accent-glow);border:1px solid rgba(168,85,247,.2);
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+}
+.plat-upload-title{font-size:var(--fs-md);font-weight:var(--fw-semibold);color:white}
+.plat-upload-sub{font-size:13px;color:rgba(255,255,255,.32)}
+
+.plat-preview{background:var(--p-surface);border:1px solid var(--p-border);border-radius:20px;overflow:hidden}
+.plat-preview-top{
+  height:152px;
+  background:linear-gradient(135deg,rgba(228,77,123,.14),rgba(168,85,247,.14),rgba(99,102,241,.14));
+  display:flex;align-items:center;justify-content:center;font-size:40px;
+  border-bottom:1px solid var(--p-border);
+}
+.plat-preview-body{padding:var(--sp-8) var(--sp-10)}
+.plat-preview-title{font-size:var(--fs-md);font-weight:var(--fw-semibold);color:white;margin-bottom:var(--sp-2)}
+.plat-preview-meta{font-size:var(--fs-sm);color:rgba(255,255,255,.38);margin-bottom:var(--sp-8)}
+.plat-row{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-4) 0;border-top:1px solid var(--p-border)}
+.plat-row-label{font-size:var(--fs-sm);color:rgba(255,255,255,.38)}
+.plat-row-val{font-size:var(--fs-sm);font-weight:var(--fw-medium);color:white}
+
+.plat-workflow{margin-top:var(--sp-8);display:flex;flex-direction:column;gap:var(--sp-3)}
+.plat-step{
+  display:flex;align-items:center;gap:var(--sp-5);
+  background:var(--p-surface);border:1px solid var(--p-border);
+  border-radius:var(--r-xl);padding:var(--sp-5) var(--sp-8);
+  transition:border-color var(--tr-fast);cursor:pointer;
+}
+.plat-step:hover{border-color:var(--p-border-hi)}
+.plat-step-num{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--p-accent-glow);border:1px solid rgba(168,85,247,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:var(--fs-xs);font-weight:var(--fw-bold);color:#c084fc;flex-shrink:0;
+}
+.plat-step-title{font-size:13px;font-weight:var(--fw-medium);color:white}
+.plat-step-desc{font-size:var(--fs-xs);color:rgba(255,255,255,.35)}
+.plat-step-badge{margin-left:auto;font-size:var(--fs-xs);padding:2px var(--sp-4);border-radius:var(--r-full);background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.18)}
+
+/* ── PLATFORM SUPPORT ── */
+.plat-support-wrap{max-width:800px;margin:0 auto;padding:var(--sp-20) var(--sp-12)}
+.plat-support-search-wrap{position:relative;margin-bottom:var(--sp-16)}
+.plat-support-search-wrap input{
+  height:52px;padding:0 var(--sp-8) 0 50px;
+  background:var(--p-surface);border:1px solid var(--p-border);
+  border-radius:var(--r-full);color:white;font-size:var(--fs-md);
+  transition:all var(--tr-fast);
+}
+.plat-support-search-wrap input:focus{outline:none;border-color:var(--p-accent);box-shadow:0 0 0 3px rgba(168,85,247,.1)}
+.plat-support-search-wrap input::placeholder{color:rgba(255,255,255,.28)}
+.plat-srch-ico{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.3)}
+
+.plat-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4);margin-bottom:var(--sp-16)}
+.plat-cat{
+  background:var(--p-surface);border:1px solid var(--p-border);
+  border-radius:16px;padding:var(--sp-8);
+  display:flex;align-items:center;gap:var(--sp-5);
+  cursor:pointer;transition:all var(--tr-fast);
+}
+.plat-cat:hover{border-color:var(--p-border-hi);background:var(--p-surface-hi)}
+.plat-cat-ico{font-size:20px;width:36px;text-align:center}
+.plat-cat-title{font-size:13px;font-weight:var(--fw-medium);color:white}
+.plat-cat-count{font-size:var(--fs-xs);color:rgba(255,255,255,.32);margin-top:2px}
+
+.plat-articles-title{font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:rgba(255,255,255,.5);margin-bottom:var(--sp-5);letter-spacing:var(--ls-wide)}
+.plat-article{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:var(--sp-6) 0;border-bottom:1px solid var(--p-border);
+  cursor:pointer;transition:color var(--tr-fast);
+}
+.plat-article:last-child{border-bottom:none}
+.plat-article:hover .plat-article-title{color:white}
+.plat-article-title{font-size:var(--fs-base);color:rgba(255,255,255,.65);transition:color var(--tr-fast)}
+.plat-article-meta{font-size:var(--fs-sm);color:rgba(255,255,255,.28);margin-top:2px}
+.plat-article-arrow{color:rgba(255,255,255,.2);font-size:16px}
+
+/* ── DARK MODE TEXT OVERRIDES FOR SHARED CONTENT ── */
+.shell.platform .page .type-page-title{color:var(--p-text)}
+.shell.platform .page .type-section-title{color:var(--p-text)}
+.shell.platform .page .type-category{color:var(--p-text-dim)}
+.shell.platform .page .text-muted{color:var(--p-text-sec)}
+.shell.platform .page p{color:var(--p-text-sec)}
+.shell.platform .page .list-row-title{color:var(--p-text)}
+.shell.platform .page .list-row-sub{color:var(--p-text-sec)}
+.shell.platform .page .type-mono{color:var(--p-text-sec)}
+.shell.platform .page .form-label{color:var(--p-text-sec)}
+.shell.platform .page .api-key-name{color:var(--p-text)}
+.shell.platform .page .api-key-id{color:var(--p-text-sec)}
+.shell.platform .page .api-key-date{color:var(--p-text-dim)}
+
+/* ── UTILITIES ── */
+.row{display:flex;align-items:center;gap:var(--sp-6)}
+.col{display:flex;flex-direction:column}
+.gap-2{gap:var(--sp-2)} .gap-3{gap:var(--sp-3)} .gap-4{gap:var(--sp-4)}
+.gap-6{gap:var(--sp-6)} .gap-8{gap:var(--sp-8)} .gap-10{gap:var(--sp-10)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-8)}
+.grid-3-1{display:grid;grid-template-columns:3fr 1.4fr;gap:var(--sp-8)}
+.ml-auto{margin-left:auto}
+.text-muted{color:var(--g500)}
+.text-xs{font-size:var(--fs-xs)}
+.text-sm{font-size:var(--fs-sm)}
+.fw-medium{font-weight:var(--fw-medium)}
+.divider{height:1px;background:var(--g200);margin:var(--sp-3) 0}
+.shell.platform .divider{background:var(--p-border)}
+.page-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-5)}
+
+/* api key rows */
+.api-key-row{
+  display:flex;align-items:center;gap:var(--sp-6);
+  padding:var(--sp-6) var(--sp-8);border-bottom:var(--border-light);
+}
+.api-key-row:last-child{border-bottom:none}
+.api-key-row:hover{background:var(--g50)}
+.api-key-name{font-size:13px;font-weight:var(--fw-medium);color:var(--black)}
+.api-key-id{font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--g500);margin-top:2px}
+.api-key-date{font-size:var(--fs-xs);color:var(--g400)}
+.shell.platform .api-key-row{border-bottom-color:var(--p-border)}
+.shell.platform .api-key-row:hover{background:rgba(255,255,255,.02)}
+
+/* team member rows */
+.member-row{
+  display:flex;align-items:center;gap:var(--sp-5);
+  padding:var(--sp-5) var(--sp-8);border-bottom:var(--border-light);
+}
+.member-row:last-child{border-bottom:none}
+.member-avatar{
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:white;flex-shrink:0;
+}
+.member-name{font-size:13px;font-weight:var(--fw-medium);color:var(--black)}
+.member-email{font-size:var(--fs-xs);color:var(--g500);margin-top:1px}
+.shell.platform .member-name{color:var(--p-text)}
+.shell.platform .member-email{color:var(--p-text-sec)}
+
+/* incident row */
+.incident-row{display:flex;align-items:flex-start;gap:var(--sp-4);padding:var(--sp-6) 0;border-bottom:var(--border-light)}
+.incident-row:last-child{border-bottom:none}
+.incident-title{font-size:13px;font-weight:var(--fw-medium);color:var(--black);margin-bottom:2px}
+.incident-meta{font-size:var(--fs-xs);color:var(--g500)}
+.shell.platform .incident-title{color:var(--p-text)}
+.shell.platform .incident-meta{color:var(--p-text-sec)}
+.shell.platform .incident-row{border-bottom-color:var(--p-border)}
+
+/* ── MODE BUBBLE ── */
+#modeBubble{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  z-index:9999;background:rgba(10,10,13,.94);
+  border:1px solid rgba(255,255,255,.1);border-radius:var(--r-full);
+  display:flex;padding:3px;gap:2px;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:0 8px 32px rgba(0,0,0,.45);
+}
+#modeBubble button{
+  padding:6px 20px;border-radius:var(--r-full);border:none;
+  background:transparent;color:rgba(255,255,255,.42);
+  font-size:12px;font-weight:var(--fw-medium);cursor:pointer;
+  transition:all var(--tr-base);font-family:inherit;letter-spacing:var(--ls-wide);
+}
+#modeBubble button:first-child.active{background:rgba(107,32,57,.55);color:rgba(255,255,255,.92)}
+#modeBubble button:last-child.active{background:linear-gradient(135deg,rgba(228,77,123,.32),rgba(168,85,247,.32));color:white}
+</style>
+</head>
+<body>
+
+<!-- ── MODE TOGGLE ── -->
+<div id="modeBubble">
+  <button class="active">Keystone</button>
+  <button>rory</button>
+</div>
+
+<div class="shell">
+
+  <!-- ════════════════════════════════════════
+       PLATFORM HEADER (hidden in corp mode)
+  ════════════════════════════════════════ -->
+  <header class="plat-header">
+    <div class="plat-logo">
+      <!-- platform logo: gradient circles -->
+      <svg width="32" height="22" viewBox="0 0 32 22" fill="none">
+        <defs>
+          <linearGradient id="pgrad" x1="0" y1="0" x2="32" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#e44d7b"/>
+            <stop offset="50%" stop-color="#a855f7"/>
+            <stop offset="100%" stop-color="#6366f1"/>
+          </linearGradient>
+        </defs>
+        <circle cx="10" cy="11" r="8.5" fill="url(#pgrad)" fill-opacity=".12" stroke="url(#pgrad)" stroke-width="3"/>
+        <circle cx="22" cy="11" r="8.5" fill="url(#pgrad)" fill-opacity=".12" stroke="url(#pgrad)" stroke-width="3"/>
+      </svg>
+      <span class="plat-wordmark">rory</span>
+    </div>
+    <nav class="plat-header-nav">
+      <a data-tab="landing" class="active">Overview</a>
+      <a data-tab="library">Library</a>
+      <a data-tab="creator">Creator</a>
+      <a data-tab="support">Support</a>
+    </nav>
+    <div class="plat-header-cta">
+      <button class="btn btn-secondary btn-sm">Sign in</button>
+      <button class="btn btn-primary btn-sm">Get started</button>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════
+       PLATFORM SECTION — LANDING
+  ════════════════════════════════════════ -->
+  <section id="plat-landing" class="plat-section">
+    <div class="plat-landing-wrap">
+      <div class="plat-hero">
+        <div class="plat-glow-orb"></div>
+        <div class="plat-glow-orb2"></div>
+        <div class="plat-eyebrow">
+          <span class="plat-eyebrow-dot"></span>
+          Now in early access
+        </div>
+        <h1 class="plat-hero-title">Your money,<br><span class="grad">moving.</span></h1>
+        <p class="plat-hero-sub">Institutional-grade infrastructure, built for how you actually live. Real-time, always on, always yours.</p>
+        <div class="plat-cta-group">
+          <button class="btn-plat-primary">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L12.5 7L7 12.5M1.5 7H12.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Get early access
+          </button>
+          <button class="btn-plat-ghost">See how it works</button>
+        </div>
+      </div>
+
+      <div class="plat-features">
+        <div class="plat-feat-card">
+          <div class="plat-feat-icon">⚡</div>
+          <div class="plat-feat-title">Real-time everything</div>
+          <p class="plat-feat-desc">Balances, transactions, and analytics update the instant anything happens. No polling, no refresh.</p>
+        </div>
+        <div class="plat-feat-card">
+          <div class="plat-feat-icon">🔀</div>
+          <div class="plat-feat-title">Instant transfers</div>
+          <p class="plat-feat-desc">Move money between accounts in seconds, not business days. Domestic and international.</p>
+        </div>
+        <div class="plat-feat-card">
+          <div class="plat-feat-icon">📊</div>
+          <div class="plat-feat-title">Smart analytics</div>
+          <p class="plat-feat-desc">Spend patterns, savings velocity, and projections — surfaced before you need to ask.</p>
+        </div>
+      </div>
+
+      <div class="plat-stats-strip">
+        <div class="plat-stat-item">
+          <div class="plat-stat-num">$2.4B</div>
+          <div class="plat-stat-label">Moved this quarter</div>
+        </div>
+        <div class="plat-stat-div"></div>
+        <div class="plat-stat-item">
+          <div class="plat-stat-num">99.99%</div>
+          <div class="plat-stat-label">Uptime, last 12 months</div>
+        </div>
+        <div class="plat-stat-div"></div>
+        <div class="plat-stat-item">
+          <div class="plat-stat-num">340ms</div>
+          <div class="plat-stat-label">Avg. transaction time</div>
+        </div>
+        <div class="plat-stat-div"></div>
+        <div class="plat-stat-item">
+          <div class="plat-stat-num">128k</div>
+          <div class="plat-stat-label">Early access users</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       PLATFORM SECTION — CREATOR
+  ════════════════════════════════════════ -->
+  <section id="plat-creator" class="plat-section">
+    <div class="plat-section-wrap">
+      <div class="plat-section-title">Build your experience</div>
+      <p class="plat-section-sub">Connect your data sources, configure automations, and ship your workflow without code.</p>
+
+      <div class="plat-creator-grid">
+        <div>
+          <div class="plat-upload-zone">
+            <div class="plat-upload-ico">📁</div>
+            <div class="plat-upload-title">Import data source</div>
+            <p class="plat-upload-sub">CSV, JSON, API endpoint, or webhook — drag here or click to browse</p>
+            <button class="btn-plat-primary" style="height:36px;font-size:13px">Choose file</button>
+          </div>
+
+          <div class="plat-workflow" style="margin-top:var(--sp-8)">
+            <div class="plat-step">
+              <div class="plat-step-num">1</div>
+              <div><div class="plat-step-title">Connect source</div><div class="plat-step-desc">Plaid, Stripe, or custom API</div></div>
+              <span class="plat-step-badge" style="margin-left:auto">Done</span>
+            </div>
+            <div class="plat-step">
+              <div class="plat-step-num">2</div>
+              <div><div class="plat-step-title">Map fields</div><div class="plat-step-desc">Match to rory schema</div></div>
+              <span class="plat-step-badge">Done</span>
+            </div>
+            <div class="plat-step" style="border-color:rgba(168,85,247,.3)">
+              <div class="plat-step-num">3</div>
+              <div><div class="plat-step-title">Configure triggers</div><div class="plat-step-desc">On event, schedule, or webhook</div></div>
+              <span style="margin-left:auto;font-size:var(--fs-xs);color:#a855f7;font-weight:500">Active</span>
+            </div>
+            <div class="plat-step" style="opacity:.45">
+              <div class="plat-step-num" style="background:transparent;border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.3)">4</div>
+              <div><div class="plat-step-title" style="color:rgba(255,255,255,.45)">Deploy</div><div class="plat-step-desc">Go live or stage for review</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="plat-preview">
+            <div class="plat-preview-top">💳</div>
+            <div class="plat-preview-body">
+              <div class="plat-preview-title">Payroll Integration</div>
+              <div class="plat-preview-meta">Connected · Last sync 2 min ago</div>
+              <div class="plat-row"><span class="plat-row-label">Provider</span><span class="plat-row-val">Gusto</span></div>
+              <div class="plat-row"><span class="plat-row-label">Frequency</span><span class="plat-row-val">Every payday</span></div>
+              <div class="plat-row"><span class="plat-row-label">Auto-split</span><span class="plat-row-val" style="color:#4ade80">Enabled</span></div>
+              <div class="plat-row"><span class="plat-row-label">Records</span><span class="plat-row-val">1,248</span></div>
+            </div>
+          </div>
+
+          <div style="margin-top:var(--sp-8);background:var(--p-surface);border:1px solid var(--p-border);border-radius:16px;padding:var(--sp-8) var(--sp-10)">
+            <div style="font-size:var(--fs-sm);font-weight:500;color:rgba(255,255,255,.6);margin-bottom:var(--sp-5)">Sample payload</div>
+            <div class="code-block" style="font-size:11px">{
+  "event": "transfer.completed",
+  "amount": 3200.00,
+  "currency": "USD",
+  "timestamp": "2026-06-06T09:41:22Z",
+  "metadata": {
+    "source": "payroll",
+    "routing": "auto-split"
+  }
+}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       PLATFORM SECTION — SUPPORT
+  ════════════════════════════════════════ -->
+  <section id="plat-support" class="plat-section">
+    <div class="plat-support-wrap">
+      <div class="plat-section-title" style="margin-bottom:var(--sp-4)">How can we help?</div>
+      <p class="plat-section-sub">Search our docs or browse by topic below.</p>
+
+      <div class="plat-support-search-wrap">
+        <svg class="plat-srch-ico" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10 10L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input type="search" placeholder="Search docs, guides, API reference…">
+      </div>
+
+      <div class="plat-cats">
+        <div class="plat-cat"><div class="plat-cat-ico">🚀</div><div><div class="plat-cat-title">Getting started</div><div class="plat-cat-count">12 articles</div></div></div>
+        <div class="plat-cat"><div class="plat-cat-ico">🔗</div><div><div class="plat-cat-title">Integrations</div><div class="plat-cat-count">24 articles</div></div></div>
+        <div class="plat-cat"><div class="plat-cat-ico">🔐</div><div><div class="plat-cat-title">Security</div><div class="plat-cat-count">9 articles</div></div></div>
+        <div class="plat-cat"><div class="plat-cat-ico">💸</div><div><div class="plat-cat-title">Transfers</div><div class="plat-cat-count">18 articles</div></div></div>
+        <div class="plat-cat"><div class="plat-cat-ico">📊</div><div><div class="plat-cat-title">Analytics</div><div class="plat-cat-count">7 articles</div></div></div>
+        <div class="plat-cat"><div class="plat-cat-ico">🛠</div><div><div class="plat-cat-title">API reference</div><div class="plat-cat-count">41 articles</div></div></div>
+      </div>
+
+      <div class="plat-articles-title">POPULAR ARTICLES</div>
+      <div>
+        <div class="plat-article"><div><div class="plat-article-title">Connect your first bank account</div><div class="plat-article-meta">Getting started · 3 min read</div></div><span class="plat-article-arrow">›</span></div>
+        <div class="plat-article"><div><div class="plat-article-title">How auto-split rules work</div><div class="plat-article-meta">Transfers · 5 min read</div></div><span class="plat-article-arrow">›</span></div>
+        <div class="plat-article"><div><div class="plat-article-title">API authentication and rate limits</div><div class="plat-article-meta">API reference · 4 min read</div></div><span class="plat-article-arrow">›</span></div>
+        <div class="plat-article"><div><div class="plat-article-title">Two-factor authentication setup</div><div class="plat-article-meta">Security · 2 min read</div></div><span class="plat-article-arrow">›</span></div>
+        <div class="plat-article"><div><div class="plat-article-title">Understanding your spend digest</div><div class="plat-article-meta">Analytics · 6 min read</div></div><span class="plat-article-arrow">›</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       CORP CHROME + SHARED MAIN CONTENT
+  ════════════════════════════════════════ -->
+  <div class="corp-sections">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <!-- corporate logo: white circles -->
+        <svg width="32" height="22" viewBox="0 0 32 22" fill="none">
+          <circle cx="10" cy="11" r="8.5" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.45)" stroke-width="2.5"/>
+          <circle cx="22" cy="11" r="8.5" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.45)" stroke-width="2.5"/>
+        </svg>
+        <div class="brand-corp-name">
+          <span>Rory</span>
+          <span>Financial</span>
+          <span>Group</span>
+        </div>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="sidebar-section-label">Workspace</div>
+
+        <div class="nav-item active">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/>
+            <rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/>
+          </svg>
+          Overview
+        </div>
+        <div class="nav-item">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M8 2L14 5.5V10.5L8 14L2 10.5V5.5L8 2Z"/>
+            <path d="M8 8L14 5.5M8 8L2 5.5M8 8V14"/>
+          </svg>
+          Services
+        </div>
+        <div class="nav-item">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/>
+          </svg>
+          Activity
+        </div>
+
+        <div class="sidebar-section-label" style="margin-top:var(--sp-4)">Management</div>
+
+        <div class="nav-item">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M2 8h3l2-5 2 10 2-5h3"/>
+          </svg>
+          Monitoring
+          <span class="nav-badge">2</span>
+        </div>
+        <div class="nav-item">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <rect x="1" y="4" width="14" height="10" rx="1.5"/>
+            <path d="M5 4V2.5C5 1.67 5.67 1 6.5 1h3c.83 0 1.5.67 1.5 1.5V4"/>
+            <path d="M1 8h14"/>
+          </svg>
+          API Keys
+        </div>
+        <div class="nav-item">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="6" cy="5" r="3"/><circle cx="12" cy="5" r="2"/>
+            <path d="M1 14c0-3 2.24-5 5-5s5 2 5 5M11 9c2 0 4 1.5 4 4"/>
+          </svg>
+          Team
+        </div>
+
+        <div class="sidebar-section-label" style="margin-top:var(--sp-4)">System</div>
+
+        <div class="nav-item">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M3 4h10M3 8h7M3 12h5"/>
+          </svg>
+          Audit Logs
+        </div>
+        <div class="nav-item">
+          <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="8" cy="8" r="3"/>
+            <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41"/>
+          </svg>
+          Settings
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="avatar-sm">AV</div>
+        <div>
+          <div class="sidebar-user-name">Annabella V.</div>
+          <div class="sidebar-user-role">Platform Admin</div>
+        </div>
+        <svg style="margin-left:auto;color:rgba(255,255,255,.3)" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="7" cy="7" r="1"/><circle cx="7" cy="3" r="1"/><circle cx="7" cy="11" r="1"/>
+        </svg>
+      </div>
+    </aside>
+
+    <!-- MAIN WRAP -->
+    <div class="main-wrap">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar-breadcrumb">
+          <span>Keystone</span>
+          <span class="sep">›</span>
+          <strong>Overview</strong>
+        </div>
+        <div class="topbar-search">
+          <svg class="topbar-search-ico" width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M8 8L11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input type="text" placeholder="Search services, keys, logs…">
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-secondary btn-sm">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M6 1v10M1 6h10"/>
+            </svg>
+            New API Key
+          </button>
+          <div class="topbar-avatar">AV</div>
+        </div>
+      </header>
+
+      <!-- MAIN PAGE (shared corp + platform library) -->
+      <main class="main">
+        <div class="page">
+
+          <!-- PAGE HEADER -->
+          <div style="display:flex;align-items:flex-start;justify-content:space-between">
+            <div>
+              <div class="type-category" style="margin-bottom:var(--sp-3)">Rory Financial Group · Keystone</div>
+              <h1 class="type-page-title">Platform Overview</h1>
+              <p class="text-muted text-sm" style="margin-top:var(--sp-3)">Friday, 6 June 2026 · All times UTC</p>
+            </div>
+            <div class="row" style="gap:var(--sp-4)">
+              <button class="btn btn-secondary">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M2 6h8M6 2l4 4-4 4"/>
+                </svg>
+                Export
+              </button>
+              <button class="btn btn-primary">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M6 1v10M1 6h10"/>
+                </svg>
+                Add Service
+              </button>
+            </div>
+          </div>
+
+          <!-- STATS GRID -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">Services Online</div>
+              <div class="row gap-4" style="align-items:baseline">
+                <div class="stat-num">12</div>
+                <span class="text-muted" style="font-size:var(--fs-lg);font-weight:var(--fw-light)">/&thinsp;14</span>
+              </div>
+              <div class="stat-sub">2 degraded or in maintenance</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">API Calls Today</div>
+              <div class="row gap-4" style="align-items:baseline">
+                <div class="stat-num">47.2k</div>
+                <span class="stat-delta">+12%</span>
+              </div>
+              <div class="stat-sub">vs. 42.1k yesterday</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Active Users</div>
+              <div class="row gap-4" style="align-items:baseline">
+                <div class="stat-num">128</div>
+                <span class="stat-delta">+4</span>
+              </div>
+              <div class="stat-sub">Across 6 teams</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Open Incidents</div>
+              <div class="row gap-4" style="align-items:baseline">
+                <div class="stat-num">2</div>
+                <span class="stat-delta neg">+1 today</span>
+              </div>
+              <div class="stat-sub">1 acknowledged, 1 investigating</div>
+            </div>
+          </div>
+
+          <!-- SERVICE STATUS + INCIDENTS -->
+          <div class="grid-3-1">
+
+            <!-- Service Status -->
+            <div>
+              <div class="page-section-head">
+                <span class="type-section-title">Service Status</span>
+                <button class="btn btn-ghost">View all</button>
+              </div>
+              <div class="list-card">
+                <div class="list-row">
+                  <div class="row gap-4">
+                    <span class="dot dot-ok dot-pulse"></span>
+                    <div>
+                      <div class="list-row-title fw-medium text-sm">API Gateway</div>
+                      <div class="list-row-sub text-xs text-muted">us-east-1, eu-west-1, ap-south-1</div>
+                    </div>
+                  </div>
+                  <span class="badge badge-ok">Operational</span>
+                </div>
+                <div class="list-row">
+                  <div class="row gap-4">
+                    <span class="dot dot-ok"></span>
+                    <div>
+                      <div class="list-row-title fw-medium text-sm">Auth Service</div>
+                      <div class="list-row-sub text-xs text-muted">OAuth 2.0 · SAML · Magic link</div>
+                    </div>
+                  </div>
+                  <span class="badge badge-ok">Operational</span>
+                </div>
+                <div class="list-row">
+                  <div class="row gap-4">
+                    <span class="dot dot-deg dot-pulse"></span>
+                    <div>
+                      <div class="list-row-title fw-medium text-sm">Data Pipeline</div>
+                      <div class="list-row-sub text-xs text-muted">Elevated latency in eu-west-1</div>
+                    </div>
+                  </div>
+                  <span class="badge badge-deg">Degraded</span>
+                </div>
+                <div class="list-row">
+                  <div class="row gap-4">
+                    <span class="dot dot-ok"></span>
+                    <div>
+                      <div class="list-row-title fw-medium text-sm">CDN (Global)</div>
+                      <div class="list-row-sub text-xs text-muted">Cloudflare · 34 edge nodes</div>
+                    </div>
+                  </div>
+                  <span class="badge badge-ok">Operational</span>
+                </div>
+                <div class="list-row">
+                  <div class="row gap-4">
+                    <span class="dot dot-maint"></span>
+                    <div>
+                      <div class="list-row-title fw-medium text-sm">Webhook Processor</div>
+                      <div class="list-row-sub text-xs text-muted">Scheduled window: 03:00–04:00 UTC</div>
+                    </div>
+                  </div>
+                  <span class="badge badge-maint">Maintenance</span>
+                </div>
+                <div class="list-row">
+                  <div class="row gap-4">
+                    <span class="dot dot-ok"></span>
+                    <div>
+                      <div class="list-row-title fw-medium text-sm">Database Cluster</div>
+                      <div class="list-row-sub text-xs text-muted">Primary · 3 replicas</div>
+                    </div>
+                  </div>
+                  <span class="badge badge-ok">Operational</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Open Incidents -->
+            <div>
+              <div class="page-section-head">
+                <span class="type-section-title">Incidents</span>
+                <button class="btn btn-ghost">History</button>
+              </div>
+              <div class="card" style="padding:var(--sp-8)">
+                <div class="incident-row">
+                  <span class="dot dot-deg dot-pulse" style="margin-top:3px"></span>
+                  <div>
+                    <div class="incident-title">Data pipeline latency spike</div>
+                    <div class="incident-meta">INC-0291 · Acknowledged · 47 min ago</div>
+                    <div style="margin-top:var(--sp-3)"><span class="badge badge-deg">Investigating</span></div>
+                  </div>
+                </div>
+                <div class="incident-row" style="border-bottom:none">
+                  <span class="dot dot-out dot-pulse" style="margin-top:3px"></span>
+                  <div>
+                    <div class="incident-title">Webhook delivery failures</div>
+                    <div class="incident-meta">INC-0290 · New · 2 hr 14 min ago</div>
+                    <div style="margin-top:var(--sp-3)"><span class="badge badge-out">Outage</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top:var(--sp-6)">
+                <div class="type-category" style="margin-bottom:var(--sp-5)">Uptime · Last 30 days</div>
+                <div class="card" style="padding:var(--sp-8)">
+                  <div style="display:flex;gap:2px;align-items:flex-end;height:32px">
+                    <!-- uptime bars -->
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:75%;background:var(--deg);border-radius:2px;opacity:.75"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:40%;background:var(--out);border-radius:2px;opacity:.8"></div>
+                    <div style="flex:1;height:90%;background:var(--deg);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:80%;background:var(--deg);border-radius:2px;opacity:.7"></div>
+                    <div style="flex:1;height:100%;background:var(--ok);border-radius:2px;opacity:.7"></div>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;margin-top:var(--sp-4)">
+                    <span class="text-xs text-muted">May 7</span>
+                    <span class="text-xs text-muted fw-medium" style="color:var(--ok-fg)">99.31% uptime</span>
+                    <span class="text-xs text-muted">Today</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- API KEYS -->
+          <div>
+            <div class="page-section-head">
+              <span class="type-section-title">API Keys</span>
+              <button class="btn btn-primary btn-sm">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M5 1v8M1 5h8"/>
+                </svg>
+                Create Key
+              </button>
+            </div>
+            <div class="list-card">
+              <div class="api-key-row">
+                <div style="flex:1">
+                  <div class="api-key-name">Production</div>
+                  <div class="api-key-id type-mono">prod_k1_••••••••••••••••3f8a</div>
+                </div>
+                <span class="badge badge-ok">Active</span>
+                <span class="api-key-date">Created Jan 12, 2026</span>
+                <button class="btn btn-ghost">Rotate</button>
+              </div>
+              <div class="api-key-row">
+                <div style="flex:1">
+                  <div class="api-key-name">Development</div>
+                  <div class="api-key-id type-mono">dev_k2_••••••••••••••••91bc</div>
+                </div>
+                <span class="badge badge-ok">Active</span>
+                <span class="api-key-date">Created Mar 3, 2026</span>
+                <button class="btn btn-ghost">Rotate</button>
+              </div>
+              <div class="api-key-row">
+                <div style="flex:1">
+                  <div class="api-key-name">Staging</div>
+                  <div class="api-key-id type-mono">stg_k3_••••••••••••••••c24d</div>
+                </div>
+                <span class="badge badge-neutral">Inactive</span>
+                <span class="api-key-date">Created Apr 18, 2026</span>
+                <button class="btn btn-ghost">Enable</button>
+              </div>
+              <div class="api-key-row">
+                <div style="flex:1">
+                  <div class="api-key-name">Analytics Readonly</div>
+                  <div class="api-key-id type-mono">ro_k4_••••••••••••••••77e1</div>
+                </div>
+                <span class="badge badge-info">Read-only</span>
+                <span class="api-key-date">Created May 30, 2026</span>
+                <button class="btn btn-ghost">Revoke</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TEAM + CODE SNIPPET -->
+          <div class="grid-2">
+
+            <!-- Team -->
+            <div>
+              <div class="page-section-head">
+                <span class="type-section-title">Team Members</span>
+                <button class="btn btn-ghost">Manage</button>
+              </div>
+              <div class="list-card">
+                <div class="member-row">
+                  <div class="member-avatar" style="background:#6B2039">AV</div>
+                  <div>
+                    <div class="member-name">Annabella V.</div>
+                    <div class="member-email">annabellaproctor@gmail.com</div>
+                  </div>
+                  <span class="badge badge-accent" style="margin-left:auto">Admin</span>
+                </div>
+                <div class="member-row">
+                  <div class="member-avatar" style="background:#4338ca">JC</div>
+                  <div>
+                    <div class="member-name">James Chen</div>
+                    <div class="member-email">j.chen@roryfinancial.com</div>
+                  </div>
+                  <span class="badge badge-neutral" style="margin-left:auto">Engineer</span>
+                </div>
+                <div class="member-row">
+                  <div class="member-avatar" style="background:#0e7490">SR</div>
+                  <div>
+                    <div class="member-name">Sofia Reyes</div>
+                    <div class="member-email">s.reyes@roryfinancial.com</div>
+                  </div>
+                  <span class="badge badge-neutral" style="margin-left:auto">Analyst</span>
+                </div>
+                <div class="member-row">
+                  <div class="member-avatar" style="background:#b45309">TN</div>
+                  <div>
+                    <div class="member-name">Tom Nakamura</div>
+                    <div class="member-email">t.nakamura@roryfinancial.com</div>
+                  </div>
+                  <span class="badge badge-neutral" style="margin-left:auto">Viewer</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Code snippet -->
+            <div>
+              <div class="page-section-head">
+                <span class="type-section-title">Quick Start</span>
+                <button class="btn btn-ghost">Full docs</button>
+              </div>
+              <div class="card" style="padding:0;overflow:hidden">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--sp-5) var(--sp-8);border-bottom:var(--border-light)">
+                  <span class="type-mono" style="color:var(--g500)">Node.js · v3 SDK</span>
+                  <button class="btn btn-ghost">Copy</button>
+                </div>
+                <div class="code-block" style="border-radius:0;margin:0">import Rory from '@rory/sdk';
+
+const client = new Rory({
+  apiKey: process.env.RORY_API_KEY,
+  env: 'production'
+});
+
+const services = await client
+  .services
+  .list({ status: 'operational' });
+
+console.log(services.data);</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /page -->
+      </main>
+    </div><!-- /main-wrap -->
+  </div><!-- /corp-sections -->
+
+</div><!-- /shell -->
+
+<script>
+document.addEventListener('click', function(e) {
+  var bubble = e.target.closest('#modeBubble button');
+  if (bubble) {
+    var btns = Array.from(document.querySelectorAll('#modeBubble button'));
+    setMode(btns.indexOf(bubble) === 0 ? 'corp' : 'plat');
+    return;
+  }
+  var navLink = e.target.closest('.plat-header-nav a');
+  if (navLink) {
+    platTab(navLink.getAttribute('data-tab'));
+  }
+});
+
+function platTab(t) {
+  var shell = document.querySelector('.shell');
+  if (!shell) return;
+  document.querySelectorAll('.plat-section').forEach(function(el) {
+    el.classList.remove('active');
+  });
+  if (t === 'library') {
+    shell.classList.add('plat-lib');
+  } else {
+    shell.classList.remove('plat-lib');
+    var target = document.getElementById('plat-' + t);
+    if (target) target.classList.add('active');
+  }
+  document.querySelectorAll('.plat-header-nav a').forEach(function(a) {
+    a.classList.toggle('active', a.getAttribute('data-tab') === t);
+  });
+}
+
+function setMode(m) {
+  var shell = document.querySelector('.shell');
+  if (!shell) return;
+  shell.classList.toggle('platform', m === 'plat');
+  shell.classList.remove('plat-lib');
+  var btns = document.querySelectorAll('#modeBubble button');
+  if (btns[0]) btns[0].classList.toggle('active', m === 'corp');
+  if (btns[1]) btns[1].classList.toggle('active', m === 'plat');
+  if (m === 'plat') {
+    platTab('landing');
+  } else {
+    document.querySelectorAll('.plat-section').forEach(function(el) {
+      el.classList.remove('active');
+    });
+  }
+}
+</script>
+</body>
+</html>
